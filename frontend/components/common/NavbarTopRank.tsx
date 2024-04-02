@@ -15,7 +15,11 @@ const token = process.env.NEXT_PUBLIC_TOKEN;
 export default function NavbarTopRank() {
   const router = useRouter();
   const [topCocktails, setTopCocktails] = useState<Top_Cocktails[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [firstIndex, setFirstIndex] = useState(0);
+  const [secondIndex, setSecondIndex] = useState(1);
+  const [currentCocktailId, setCurrentCocktailId] = useState(1);
+  const [currentCocktailName, setCurrentCocktailName] = useState('');
+  const [nextCocktailName, setNextCocktailName] = useState('');
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/recommends/heart-rank`, {
@@ -35,25 +39,7 @@ export default function NavbarTopRank() {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-
-    // console.log(topCocktails);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (currentIndex < 9) {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % 10);
-      } else {
-        setCurrentIndex(0);
-      }
-    }, 1510);
-
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const currentCocktailId = topCocktails[currentIndex + 1]?.cocktail_id;
 
   const goToDetail = () => {
     if (currentCocktailId !== undefined) {
@@ -61,74 +47,90 @@ export default function NavbarTopRank() {
     }
   };
 
-  const secondIndex = `${currentIndex + 1}`;
-  const thirdIndex = `${currentIndex + 2}`;
+  const interval = setInterval(() => {
+    console.log(firstIndex, secondIndex);
+    setFirstIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1 > 9 ? 0 : prevIndex + 1;
+      setCurrentCocktailId(topCocktails[nextIndex]?.cocktail_id);
+      setCurrentCocktailName(topCocktails[nextIndex]?.cocktail_korean_name);
+      return nextIndex;
+    });
 
-  const currentCocktailName =
-    topCocktails[currentIndex]?.cocktail_korean_name || '';
-  const first = '';
+    setSecondIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1 > 9 ? 0 : prevIndex + 1;
+      setNextCocktailName(topCocktails[nextIndex]?.cocktail_korean_name);
+      return nextIndex;
+    });
+  }, 1510);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    console.log('Interval stopped.');
+  }, 1510);
+
+  // const currentCocktailName =
+  //   topCocktails[firstIndex]?.cocktail_korean_name || '';
+  // const first = '';
   // const firstCocktailName = topCocktails[0]?.cocktail_korean_name || '';
-  // const current = `${currentIndex + 1}  ${currentCocktailName}`;
-  const nextCocktailName =
-    topCocktails[currentIndex + 1]?.cocktail_korean_name || '';
-  // const next = `${currentIndex + 2}  ${nextCocktailName}`;
+  // const current = `${firstIndex + 1}  ${currentCocktailName}`;
+  // const nextCocktailName =
+  // topCocktails[firstIndex + 1]?.cocktail_korean_name || '';
+  // const next = `${firstIndex + 2}  ${nextCocktailName}`;
 
-  const current = `${currentCocktailName}`;
-  const next = `${nextCocktailName}`;
+  // const current = `${currentCocktailName}`;
+  // const next = `${nextCocktailName}`;
 
   return (
     <div>
       <div>
         <div className={styles.parent}>
-          {currentIndex === 0 && (
+          {firstIndex === 0 && (
             <div>
               <div
                 role="presentation"
                 onClick={goToDetail}
                 className={styles['slide-test']}
-              >
-                {first}
-              </div>
+              />
               <div
                 role="presentation"
                 onClick={goToDetail}
                 className={styles['slide-test']}
               >
-                <span className={styles.point}>{secondIndex} &nbsp;</span>{' '}
-                {current}
+                <span className={styles.point}>{firstIndex} &nbsp;</span>{' '}
+                {currentCocktailName}
               </div>
             </div>
           )}
 
-          {currentIndex !== 0 && currentIndex !== 9 && (
+          {firstIndex !== 0 && firstIndex !== 9 && (
             <div>
               <div
                 role="presentation"
                 onClick={goToDetail}
                 className={styles['slide-test']}
               >
-                <span className={styles.point}>{secondIndex} &nbsp;</span>{' '}
-                {current}
+                <span className={styles.point}>{firstIndex} &nbsp;</span>{' '}
+                {currentCocktailName}
               </div>
-              <div
-                role="presentation"
-                onClick={goToDetail}
-                className={styles['slide-test']}
-              >
-                <span className={styles.point}>{thirdIndex} &nbsp;</span>
-                {next}
-              </div>
-            </div>
-          )}
-          {currentIndex === 9 && (
-            <div>
               <div
                 role="presentation"
                 onClick={goToDetail}
                 className={styles['slide-test']}
               >
                 <span className={styles.point}>{secondIndex} &nbsp;</span>
-                {current}
+                {nextCocktailName}
+              </div>
+            </div>
+          )}
+          {firstIndex === 9 && (
+            <div>
+              <div
+                role="presentation"
+                onClick={goToDetail}
+                className={styles['slide-test']}
+              >
+                <span className={styles.point}>{firstIndex} &nbsp;</span>
+                {currentCocktailName}
               </div>
             </div>
           )}
