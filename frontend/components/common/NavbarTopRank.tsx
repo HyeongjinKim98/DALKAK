@@ -55,11 +55,13 @@ export default function NavbarTopRank() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
-  const currentCocktailId = topCocktails[currentIndex + 1]?.cocktail_id;
+  const currentCocktailId = topCocktails[currentIndex]?.cocktail_id;
 
   const goToDetail = () => {
     if (currentCocktailId !== undefined) {
       router.push(`/cocktail/${currentCocktailId}`);
+    } else {
+      router.push(`/cocktail/${topCocktails[0]?.cocktail_id}`);
     }
   };
 
