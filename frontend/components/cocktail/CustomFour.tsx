@@ -1,17 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import styles from './CustomFour.module.scss';
 import BtnWithIcon from '../common/BtnWithIcon';
 import NoContent from '../common/NoContent';
 import CustomCocktailCard from '../custom-cocktail/CustomCocktailCard';
-
 import authStore from '@/store/authStore';
-
-interface IPropsType {
-  cocktailId: number;
-}
 
 interface ICustomCocktail {
   id: number;
@@ -24,8 +19,9 @@ interface ICustomCocktail {
   };
 }
 
-export default function CustomFour(props: IPropsType) {
-  const { cocktailId } = props;
+export default function CustomFour() {
+  const pathName = usePathname();
+  const cocktailId = pathName.split('/')[2];
 
   const [customList, setCustomList] = useState<ICustomCocktail[]>([]);
 

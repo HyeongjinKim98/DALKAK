@@ -71,7 +71,7 @@ export default async function CocktailDetail({ cocktailId }: Props) {
             <div className={styles.name}>{cocktailDetailData.name}</div>
 
             <div className={styles.nickname}>
-              <LikeCount cocktailId={cocktailId} />
+              <LikeCount />
               <div className={styles.info}>
                 {cocktailDetailData.alcohol_content}도
               </div>
@@ -113,7 +113,7 @@ export default async function CocktailDetail({ cocktailId }: Props) {
 
         <hr className={styles.hr2} />
         <div className={styles.flex}>
-          <CustomFour cocktailId={cocktailId} />
+          <CustomFour />
         </div>
       </div>
       <div />
