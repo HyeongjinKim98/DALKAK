@@ -13,9 +13,10 @@ export default function AlcoholArea() {
   const [alcoholList, setAlcoholList] = useState<IIngredientType[]>([]);
 
   useLayoutEffect(() => {
-    const onlyAlcohol = refgList.filter(
-      (ingredient) => ingredient.category.id === 1,
-    );
+    const onlyAlcohol =
+      refgList?.length === 0
+        ? []
+        : refgList.filter((ingredient) => ingredient.category.id !== 1);
     setAlcoholList(onlyAlcohol);
   }, [refgList]);
 

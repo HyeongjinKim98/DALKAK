@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Navbar from '../components/common/Navbar';
 import '../styles/globals.scss';
 
-export const metadata:Metadata = {
+export const metadata: Metadata = {
   title: 'DALKAK',
   description: '당신의 칵테일 취향을 달칵',
   icons: {

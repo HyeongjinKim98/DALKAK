@@ -13,9 +13,10 @@ export default function FoodArea() {
   const [foodList, setFoodList] = useState<IIngredientType[]>([]);
 
   useLayoutEffect(() => {
-    const onlyFood = refgList.filter(
-      (ingredient) => ingredient.category.id !== 1,
-    );
+    const onlyFood =
+      refgList?.length === 0
+        ? []
+        : refgList.filter((ingredient) => ingredient.category.id !== 1);
     setFoodList(onlyFood);
   }, [refgList]);
 

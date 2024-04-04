@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import './main.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -21,6 +21,7 @@ export default function Page() {
   const isLoggedin = memberStore((state) => state.isLoggedIn);
   const [cocktails, setCocktails] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [userNickname, setUserNickname] = useState('');
   const itemsPerPage = 4;
 
   const router = useRouter();
@@ -62,6 +63,7 @@ export default function Page() {
       window.location.href = '/oauth';
     }
     getRecommendation();
+    setUserNickname(memberStore.getState().nickname);
   }, [isLoggedin]);
 
   useEffect(() => {
@@ -76,8 +78,7 @@ export default function Page() {
     <div className="mainWrapper">
       <Image className="bartender" src={bartender} alt="bartender" width={80} />
       <div className="title-main">
-        {memberStore.getState().nickname}님이 좋아하실 만한 칵테일을
-        추천해봤어요
+        {userNickname}님이 좋아하실 만한 칵테일을 추천해봤어요
       </div>
       <div className="cocktail-list">
         <div className="cocktail-scroll">

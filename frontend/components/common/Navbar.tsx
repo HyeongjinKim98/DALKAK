@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,18 +16,11 @@ import memberStore from '@/store/memberStore';
 
 export default function Navbar() {
   const pathName = usePathname();
-  // const tmp = memberStore((state) => state.actions.tmp);
-  // eslint-disable-next-line no-unused-expressions
   const isLoggedIn = memberStore((state) => state.isLoggedIn);
-  // const nickname = memberStore((state) => state.nickname);
   const clearAll = memberStore((state) => state.clearAll);
   const clearTokens = authStore((state) => state.clearTokens);
-  // const accessToken = authStore((state) => state.accessToken);
-  // const headerConfig = {
-  //   headers: {
-  //     Authorization: accessToken,
-  //   },
-  // };
+  const [userNickname, setUserNickname] = useState('');
+
   const LogoutFunction = async () => {
     try {
       const response = await Logout();
@@ -40,6 +33,10 @@ export default function Navbar() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    setUserNickname(memberStore.getState().nickname);
+  }, []);
 
   return (
     <div className={styles.navbar}>
@@ -78,9 +75,7 @@ export default function Navbar() {
       <div className={styles.right}>
         {isLoggedIn ? (
           <>
-            <div className={styles.nickname}>
-              {memberStore.getState().nickname} 님 반가워요!
-            </div>
+            <div className={styles.nickname}>{userNickname}</div>님 반가워요!
             <button
               className={styles.btn}
               type="button"
