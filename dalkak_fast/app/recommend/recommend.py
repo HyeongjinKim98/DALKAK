@@ -26,10 +26,13 @@ def recommend_by_prefer(m_id: int, db: Session):
       for k in filtered_rows['cluster_label'].to_dict().keys():
         candidates.add(k + 1)
   df = pd.read_csv('/code/app/for_recommend.csv', index_col=0)
-  if len(candidates) < 30:
+  if len(candidates) > 30:
     df = df[['base_spirit', 'degree', 'sugar', '오후 술', '저녁 술', '식전 술', '식후 술']]
   else:
-    df = df.iloc[list(candidates), [df.columns.get_loc('base_spirit'),
+    tmp=[]
+    for cc in candidates:
+      tmp.append(cc-1)
+    df = df.iloc[tmp, [df.columns.get_loc('base_spirit'),
                                     df.columns.get_loc('degree'),
                                     df.columns.get_loc('sugar'),
                                     df.columns.get_loc('오후 술'),
