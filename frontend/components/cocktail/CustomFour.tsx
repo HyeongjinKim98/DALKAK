@@ -21,6 +21,7 @@ interface ICustomCocktail {
 
 export default function CustomFour() {
   const pathName = usePathname();
+  console.log(pathName.split('/'));
   const cocktailId = pathName.split('/')[2];
 
   const [customList, setCustomList] = useState<ICustomCocktail[]>([]);

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 
@@ -32,35 +32,77 @@ interface Cocktail_Ingredients {
   unit: Unit;
 }
 
+interface CocktailTools {
+  id: number;
+  name: string;
+  image: string;
+}
+
+interface IDetailType {
+  alcohol_content: number;
+  cocktail_ingredients: Cocktail_Ingredients[];
+  cocktail_tools: CocktailTools[];
+  heart: boolean;
+  heart_count: number;
+  id: number;
+  image: string;
+  korean_name: string;
+  name: string;
+  recipe: string;
+  sweetness: number;
+  view_count: number;
+}
+
 interface Props {
   cocktailId: number;
 }
 
-const authorization =
-  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJpYXQiOjE3MTIxOTc5OTksImV4cCI6MTcxMjYyOTk5OSwiaWQiOjZ9.w_9FzZor4EvYAWqZCvsi-fOkIvvwcD8jaWitynt12hI';
+export default function CocktailDetail({ cocktailId }: Props) {
+  const [cocktailDetailData, setCocktailDetailData] = useState<IDetailType>({
+    alcohol_content: 0,
+    cocktail_ingredients: [],
+    cocktail_tools: [],
+    heart: false,
+    heart_count: 0,
+    id: 1,
+    image: '',
+    korean_name: '',
+    name: '',
+    recipe: '',
+    sweetness: 0,
+    view_count: 0,
+  });
+  const [cocktailIngredients, setCocktailIngredients] = useState<
+    Cocktail_Ingredients[]
+  >([]);
+  const authorization =
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJpYXQiOjE3MTIxOTc5OTksImV4cCI6MTcxMjYyOTk5OSwiaWQiOjZ9.w_9FzZor4EvYAWqZCvsi-fOkIvvwcD8jaWitynt12hI';
 
-export async function getData({ cocktailId }: Props) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/cocktails/${cocktailId}`,
-    {
-      headers: {
-        authorization,
-      },
-    },
-  );
+  useEffect(() => {
+    async function getData(id: number) {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/cocktails/${id}`,
+        {
+          headers: {
+            authorization,
+          },
+        },
+      );
 
-  if (!response.ok) {
-    // const error = new Error('Failed to fetch data');
-    return 401;
-  }
-  const data = await response.json();
-  return (await data).data;
-}
+      if (!response.ok) {
+        return 401;
+      }
+      const { data } = await response.json();
+      setCocktailDetailData(await data);
+      setCocktailIngredients(await data.cocktail_ingredients);
+      console.log(data);
+      return data;
+    }
+    getData(cocktailId);
+  }, [cocktailId]);
 
-export default async function CocktailDetail({ cocktailId }: Props) {
-  const cocktailDetailData = await getData({ cocktailId });
-  const cocktailIngredients: Cocktail_Ingredients[] =
-    cocktailDetailData.cocktail_ingredients;
+  // const cocktailIngredients: Cocktail_Ingredients[] =
+  //   cocktailDetailData.cocktail_ingredients;
   // console.log(cocktailDetailData);
 
   return (
@@ -73,10 +115,10 @@ export default async function CocktailDetail({ cocktailId }: Props) {
             <div className={styles.nickname}>
               <LikeCount />
               <div className={styles.info}>
-                {cocktailDetailData.alcohol_content}도
+                {cocktailDetailData?.alcohol_content}도
               </div>
               <div className={styles.info}>
-                당도{cocktailDetailData.sweetness}
+                당도{cocktailDetailData?.sweetness}
               </div>
             </div>
           </div>
