@@ -3,7 +3,6 @@
 
 'use client';
 
-import { error } from 'console';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import LockOutlined from '@mui/icons-material/LockOutlined';
@@ -21,8 +20,6 @@ import CustomCocktailAddRecipe from '@/components/custom-cocktail/write/CustomCo
 import CustomCocktailImageUpload from '@/components/custom-cocktail/write/CustomCocktailImageUpload';
 import CustomCocktailInput from '@/components/custom-cocktail/write/CustomCocktailInput';
 import authStore from '@/store/authStore';
-// import { error } from 'console';
-// import { RepeatOneSharp } from '@mui/icons-material';
 
 interface Unit {
   id: number;
@@ -282,7 +279,7 @@ export default function CustomCocktailModify(props: Props) {
           router.push(`/cocktail/detail?id=${customId}`);
         } else {
           // eslint-disable-next-line no-console
-          throw error;
+          throw new Error('Failed to fetch data');
           // eslint-disable-next-line no-console
         }
       } else {
