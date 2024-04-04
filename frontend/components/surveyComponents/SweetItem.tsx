@@ -21,7 +21,6 @@ export default function SweetItem({
     surveyStore.getState().sweetness === id,
   );
   useEffect(() => {
-    console.log(name);
     const deselect = surveyStore.subscribe(() => {
       const newSelected = surveyStore.getState().sweetness === val;
       setSelected(newSelected);

@@ -39,8 +39,6 @@ export default function NavbarTopRank() {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-
-    // console.log(topCocktails);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

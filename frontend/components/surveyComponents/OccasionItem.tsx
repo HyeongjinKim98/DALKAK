@@ -19,7 +19,6 @@ export default function OccasionItem({
     surveyStore.getState().occassionId === id,
   );
   useEffect(() => {
-    console.log(name);
     const deselect = surveyStore.subscribe(() => {
       const newSelected = surveyStore.getState().occassionId === id;
       setSelected(newSelected);

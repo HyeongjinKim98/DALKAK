@@ -21,7 +21,6 @@ interface ICustomCocktail {
 
 export default function CustomFour() {
   const pathName = usePathname();
-  console.log(pathName.split('/'));
   const cocktailId = pathName.split('/')[2];
 
   const [customList, setCustomList] = useState<ICustomCocktail[]>([]);
@@ -42,11 +41,10 @@ export default function CustomFour() {
         return response.json();
       })
       .then((result) => {
-        console.log('>>', result.data.custom_cocktails);
         setCustomList(result.data.custom_cocktails);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        throw error;
       });
   }, [authorization, cocktailId]);
 

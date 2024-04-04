@@ -82,7 +82,6 @@ export default function LikeCount() {
         return response.json();
       })
       .then((result) => {
-        // console.log(result.data);
         setIsLike(result.data.heart);
         setCount(result.data.heart_count);
       })

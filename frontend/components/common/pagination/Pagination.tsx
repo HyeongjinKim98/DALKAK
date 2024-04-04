@@ -30,9 +30,6 @@ export default function Pagination({ articles, totalPages }: Props) {
   const handlePageClick = (e: { selected: number }) => {
     if (articles) {
       const newOffset = (e.selected * 20) % articles.length;
-      // console.log(
-      //   `User requested page number ${e.selected}, which is offset ${newOffset}`,
-      // );
       setItemOffset(newOffset);
     }
   };

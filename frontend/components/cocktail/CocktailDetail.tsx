@@ -95,15 +95,10 @@ export default function CocktailDetail({ cocktailId }: Props) {
       const { data } = await response.json();
       setCocktailDetailData(await data);
       setCocktailIngredients(await data.cocktail_ingredients);
-      console.log(data);
       return data;
     }
     getData(cocktailId);
   }, [cocktailId]);
-
-  // const cocktailIngredients: Cocktail_Ingredients[] =
-  //   cocktailDetailData.cocktail_ingredients;
-  // console.log(cocktailDetailData);
 
   return (
     <div className={styles['flex-container']}>

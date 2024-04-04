@@ -14,10 +14,6 @@ interface Props {
 }
 
 export default function ToolCardWrapper({ cocktailTools }: Props) {
-  // const lastIndex = cocktailTools.length - 1;
-
-  // console.log('하하핳' + cocktailTools);
-
   return (
     <div>
       <div className={styles.flex}>
@@ -30,8 +26,6 @@ export default function ToolCardWrapper({ cocktailTools }: Props) {
               // eslint-disable-next-line react/no-array-index-key
               key={index}
               cocktailTool={tool}
-              // index={index}
-              // lastIndex={lastIndex}
             />
           ))
         ) : (

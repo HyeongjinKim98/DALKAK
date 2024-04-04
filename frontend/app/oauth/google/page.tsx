@@ -38,7 +38,6 @@ export default function Page() {
       .then((response) => {
         const res = response.data as AuthResponse;
         const data = res.data as ResponseData;
-        console.log(res.data);
         setTokens(data.accessToken, data.refreshToken, 0, 0);
         setInfo(data.id, data.nickname, data.survey_completion || false);
 
@@ -50,7 +49,7 @@ export default function Page() {
         }
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
   };
 

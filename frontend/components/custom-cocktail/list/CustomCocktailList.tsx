@@ -86,10 +86,6 @@ export default function CustomCocktailList(props: Props) {
     updateCustomList();
   }, [currentPage, getCustomList, cocktailId]);
 
-  // const confirm = () => {
-  //   console.log(customAllData?.custom_cocktails);
-  // };
-
   return (
     <div>
       {/* <button type="button" onClick={confirm}>

@@ -53,15 +53,13 @@ export default function CustomCocktailDeleteButton({
           if (response.ok) {
             router.push(`/cocktail/customs?id=${cocktailId}`);
           } else {
-            console.error('커스텀 레시피 삭제 실패');
             Swal.fire({
               title: '커스텀 레시피 삭제를 실패하였습니다.',
               icon: 'error',
             });
           }
         } catch (error) {
-          console.log('서버와 통신 중 오류 발생');
-          console.log(error);
+          /* empty */
         }
 
         Swal.fire({
@@ -70,28 +68,6 @@ export default function CustomCocktailDeleteButton({
         });
       }
     });
-    // if (!confirmed) {
-    //   return;
-    // }
-    // try {
-    //   const response = await fetch(
-    //     `${process.env.NEXT_PUBLIC_BASE_URL}/customs/${customId}`,
-    //     {
-    //       method: 'Delete',
-    //       headers: {
-    //         authorization,
-    //       },
-    //     },
-    //   );
-    //   if (response.ok) {
-    //     router.push(`/cocktail/customs?id=${cocktailId}`);
-    //   } else {
-    //     console.error('커스텀 레시피 삭제 실패');
-    //   }
-    // } catch (error) {
-    //   console.log('서버와 통신 중 오류 발생');
-    //   console.log(error);
-    // }
   };
 
   return (

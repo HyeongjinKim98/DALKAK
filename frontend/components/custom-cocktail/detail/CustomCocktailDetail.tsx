@@ -84,8 +84,6 @@ export default function CustomCocktailDetail({ customId }: Props) {
   const authorization = getAccessToken();
 
   useEffect(() => {
-    // console.log(customId);
-
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/customs/${customId}`, {
       headers: {
         authorization,
@@ -93,7 +91,6 @@ export default function CustomCocktailDetail({ customId }: Props) {
     })
       .then((response) => {
         if (!response.ok) {
-          // console.log(response);
           if (response.status === 403) {
             return 403;
           }

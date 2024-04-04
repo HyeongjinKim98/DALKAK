@@ -28,8 +28,6 @@ export default function InfoSurvey() {
       Authorization: accessToken,
     },
   };
-  const [isNicknameChecked, setIsNicknameChecked] = useState<boolean>(false);
-  console.log(isNicknameChecked);
   const [memberInfo, setMemberInfo] = useState<IMemberInfo>({
     nickname: '',
     birth: '',
@@ -76,20 +74,16 @@ export default function InfoSurvey() {
         headerConfig,
       )
       .then(() => {
-        setIsNicknameChecked(true);
-
         Swal.fire({
           title: '사용 가능한 닉네임입니다',
           icon: 'success',
         });
       })
-      .catch((err) => {
+      .catch(() => {
         Swal.fire({
           title: '중복된 닉네임입니다',
           icon: 'warning',
         });
-
-        console.log(err);
       });
   };
 

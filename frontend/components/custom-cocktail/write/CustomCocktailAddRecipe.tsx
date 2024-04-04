@@ -33,8 +33,6 @@ export default function CustomCocktailAddRecipe({
   const splitedRecipe = (inputValue: string) =>
     inputValue.split(/\|+/).join('\n\n');
 
-  // console.log(inputValue);
-
   return (
     <div>
       <div className={styles.title}>레시피</div>
