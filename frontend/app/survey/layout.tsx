@@ -82,6 +82,15 @@ export default function Layout({
   const submit = async () => {
     const { surveyCocktails, occassionId, baseId, alcoholContent, sweetness } =
       surveyStore.getState();
+
+    if (sweetness === 0) {
+      Swal.fire({
+        title: '당도를 선택해주세요!',
+        icon: 'warning',
+      });
+      return;
+    }
+
     try {
       const response = await submitSurvey({
         survey_cocktails: surveyCocktails,

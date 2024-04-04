@@ -60,6 +60,13 @@ export default function InfoSurvey() {
   };
 
   const checkNickname = async () => {
+    if (surveyStore.getState().nickname === '') {
+      Swal.fire({
+        title: '닉네임을 입력해주세요',
+        icon: 'warning',
+      });
+      return;
+    }
     await axios
       .post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/users/profile/dupcheck`,
@@ -72,13 +79,13 @@ export default function InfoSurvey() {
         setIsNicknameChecked(true);
 
         Swal.fire({
-          title: '사용 가능한 닉네임입니다!',
+          title: '사용 가능한 닉네임입니다',
           icon: 'success',
         });
       })
       .catch((err) => {
         Swal.fire({
-          title: '중복된 닉네임입니다.',
+          title: '중복된 닉네임입니다',
           icon: 'warning',
         });
 
