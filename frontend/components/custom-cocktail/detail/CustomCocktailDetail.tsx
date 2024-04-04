@@ -2,7 +2,7 @@
 
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
-
+import { usePathname, useSearchParams } from 'next/navigation';
 import styles from './CustomCocktailDetail.module.scss';
 
 import CustomCocktailDetailButtonArea from './CustomCocktailDetailButtonArea';
@@ -82,26 +82,69 @@ export default function CustomCocktailDetail({ customId }: Props) {
 
   const getAccessToken = () => authStore.getState().accessToken;
   const authorization = getAccessToken();
+  const [boardId, setBoardId] = useState<string | undefined>();
+  const pathName = usePathname();
+  const pathname2 = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/customs/${customId}`, {
-      headers: {
-        authorization,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          if (response.status === 403) {
-            return 403;
-          }
-          return 404;
+    const url = `${pathname2}?${searchParams}`;
+
+    if (pathName) {
+      const pathSegment = pathName.split('/');
+      if (pathSegment !== undefined) {
+        setBoardId(pathSegment.pop());
+      }
+      console.log(customId);
+    }
+  }, [pathName, pathname2, searchParams]);
+  // useEffect(() => {
+  //   fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/customs/${customId}`, {
+  //     headers: {
+  //       authorization,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         if (response.status === 403) {
+  //           return 403;
+  //         }
+  //         return 404;
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((result) => {
+  //       setCustomCocktailDetailData(result.data);
+  //     });
+  // }, [authorization, customId]);
+
+  useEffect(() => {
+    const fetchCustom = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/customs/${customId}`,
+          {
+            headers: {
+              authorization,
+            },
+          },
+        );
+
+        if (response.ok) {
+          const result = await response.json();
+          setCustomCocktailDetailData(result.data);
+          console.log(result);
+        } else {
+          console.log(response.status);
         }
-        return response.json();
-      })
-      .then((result) => {
-        setCustomCocktailDetailData(result.data);
-      });
-  }, [authorization, customId]);
+      } catch (error) {
+        console.log(error);
+        console.log('네트워크 오류');
+      }
+    };
+
+    fetchCustom();
+  }, []);
 
   let customIngredients: Custom_Ingredients[] = [];
   let originCocktail: Origin_Cocktail = {

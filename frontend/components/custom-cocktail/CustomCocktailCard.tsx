@@ -34,7 +34,7 @@ export default function CustomCocktailCard({ custom, type }: Props) {
     type === 'big' ? styles.comment : styles['comment-preview'];
 
   return (
-    <Link href={{ pathname: '/cocktail/detail', query: { id: custom.id } }}>
+    <Link href={{ pathname: `/cocktail/detail/${custom.id}` }}>
       <div className={styles['grid-item']}>
         <div className={styles['image-box']}>
           <img
