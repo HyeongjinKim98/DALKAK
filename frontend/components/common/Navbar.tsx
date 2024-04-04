@@ -67,18 +67,21 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      <div className={styles.center}>
-        <div className={styles.fix}>
-          현재 가장 인기 있는 칵테일&nbsp;&nbsp;|&nbsp;&nbsp;
-        </div>
-        <div>
+      <div className={styles['center-left']}>
+        <div className={styles['rank-text']}>현재 가장 인기 있는 칵테일</div>
+        <div>|</div>
+      </div>
+      <div className={styles['center-right']}>
+        <div className={styles.rank}>
           <NavbarTopRank />
         </div>
       </div>
       <div className={styles.right}>
         {isLoggedIn ? (
           <>
-            <div className={styles.nickname}>{userNickname}</div>님 반가워요!
+            <div className={styles.nickname}>{userNickname}</div>
+            <div className={styles.niceto}>님 반가워요!</div>
+
             <button
               className={styles.btn}
               type="button"
