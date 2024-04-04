@@ -11,6 +11,7 @@ import { Logout } from '@/apis/Auth';
 import logo from '@/public/assets/imgs/dalkak_logo.png';
 import authStore from '@/store/authStore';
 import memberStore from '@/store/memberStore';
+import useRefrigeratorStore from '@/store/refrigeratorStore';
 
 // import memberStore from '@/store/memberStore';
 
@@ -20,12 +21,14 @@ export default function Navbar() {
   const clearAll = memberStore((state) => state.clearAll);
   const clearTokens = authStore((state) => state.clearTokens);
   const [userNickname, setUserNickname] = useState('');
+  const { clearRefgMemo } = useRefrigeratorStore();
 
   const LogoutFunction = async () => {
     try {
       const response = await Logout();
       clearAll();
       clearTokens();
+      clearRefgMemo();
       if (response.status === 200 || response.status === 401) {
         window.location.replace('/');
       }

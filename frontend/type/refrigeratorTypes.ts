@@ -20,4 +20,5 @@ export interface IRefrigeratorType {
   removeMemoList: (id: number) => void;
   memoToRefr: (id: number) => void;
   refrToMemo: (id: number) => void;
+  clearRefgMemo: () => void;
 }

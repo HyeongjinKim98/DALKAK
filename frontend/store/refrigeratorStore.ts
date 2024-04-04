@@ -107,6 +107,10 @@ const useRefrigeratorStore = create(
         useRefrigeratorStore.getState().setRefgList();
         useRefrigeratorStore.getState().setMemoList();
       },
+      clearRefgMemo: () => {
+        set({ refgList: [] });
+        set({ memoList: [] });
+      },
     }),
     {
       name: 'refrigerator',
