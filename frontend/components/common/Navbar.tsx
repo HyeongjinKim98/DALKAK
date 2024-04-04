@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.scss';
 import NavbarTopRank from './NavbarTopRank';
 import { Logout } from '@/apis/Auth';
-import logo from '@/public/assets/dalkak_logo.png';
+import logo from '@/public/assets/imgs/dalkak_logo.png';
 import authStore from '@/store/authStore';
 import memberStore from '@/store/memberStore';
 

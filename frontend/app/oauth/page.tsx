@@ -3,7 +3,7 @@ import React from 'react';
 import './main.scss';
 import Image from 'next/image';
 import OauthButton from '@/components/common/main/OauthButton';
-import logo from '@/public/assets/dalkak_logo.png';
+import logo from '@/public/assets/imgs/dalkak_logo.png';
 
 export default function page() {
   return (
@@ -17,17 +17,17 @@ export default function page() {
         <OauthButton
           provider="GOOGLE"
           bgcolor="google"
-          icon="../assets/imgs/icon-google.svg"
+          icon="../assets/imgs/oauth/icon-google.svg"
         />
         <OauthButton
           provider="KAKAO"
           bgcolor="kakao"
-          icon="../assets/imgs/icon-kakao.svg"
+          icon="../assets/imgs/oauth/icon-kakao.svg"
         />
         <OauthButton
           provider="NAVER"
           bgcolor="naver"
-          icon="../assets/imgs/icon-naver.svg"
+          icon="../assets/imgs/oauth/icon-naver.svg"
         />
       </div>
     </div>
