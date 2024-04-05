@@ -18,6 +18,8 @@ interface storeState {
   progress: number;
   nickname: string;
   birthDate: string;
+  isNicknameChecked: boolean;
+  isBirthDateChecked: boolean;
   gender: string;
   surveyCocktails: number[];
   baseId: number;
@@ -30,6 +32,8 @@ interface storeState {
   beforeProgress: () => void;
   setNickname: (nickname: string) => void;
   setBirthDate: (birthDate: string) => void;
+  setisNicknameChecked: (isNicknameChecked: boolean) => void;
+  setisBirthDateChecked: (isBirthDateChecked: boolean) => void;
   setGender: (gender: string) => void;
   setSurveyCocktails: (cocktails: number[]) => void;
   addSurveyCocktails: (cocktail: number) => void;
@@ -49,6 +53,8 @@ const surveyStore = create(
       progress: 0,
       nickname: '',
       birthDate: '',
+      isNicknameChecked: false,
+      isBirthDateChecked: false,
       gender: '',
       surveyCocktails: [],
       baseId: 0,
@@ -72,6 +78,12 @@ const surveyStore = create(
       },
       // set survey states
       setNickname: (nickname: string) => set({ nickname }),
+      setisBirthDateChecked(isBirthDateChecked) {
+        set({ isBirthDateChecked });
+      },
+      setisNicknameChecked(isNicknameChecked) {
+        set({ isNicknameChecked });
+      },
       setBirthDate: (birthDate: string) => set({ birthDate }),
       setGender(gender: string) {
         set({ gender });

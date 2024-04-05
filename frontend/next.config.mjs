@@ -16,9 +16,6 @@ const nextConfig = {
     config.resolve.alias['@'] = path.resolve(__dirname, './styles');
     return config;
   },
-  // images: {
-  //   unoptimized: true,
-  // },
 };
 
 export default nextConfig;

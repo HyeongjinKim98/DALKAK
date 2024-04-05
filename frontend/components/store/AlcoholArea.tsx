@@ -16,7 +16,7 @@ export default function AlcoholArea() {
     const onlyAlcohol =
       refgList?.length === 0
         ? []
-        : refgList.filter((ingredient) => ingredient.category.id !== 1);
+        : refgList.filter((ingredient) => ingredient.category.id === 1);
     setAlcoholList(onlyAlcohol);
   }, [refgList]);
 

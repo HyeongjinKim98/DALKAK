@@ -22,7 +22,8 @@ export default function Layout({
   const progress = surveyStore((state) => state.progress);
   const getQuestion = surveyStore((state) => state.getQuestion);
   const nextProgress = surveyStore((state) => state.nextProgress);
-  const beforeProgress = surveyStore((state) => state.beforeProgress);
+  // deprecated
+  // const beforeProgress = surveyStore((state) => state.beforeProgress);
   // const addSurveyIngredients = surveyStore(
   //   (state) => state.addSurveyIngredients,
   // );
@@ -124,9 +125,7 @@ export default function Layout({
       </div>
       <div className="surveyWrapper">{children}</div>
       <div className="progressWrapper">
-        {progress > 0 && (
-          // temp
-          // progress < 6 &&
+        {/* {progress > 0 && (
           <button
             className="before"
             type="button"
@@ -134,65 +133,62 @@ export default function Layout({
           >
             이전
           </button>
-        )}
-
-        {progress < 5 && (
-          <button
-            className="next"
-            type="button"
-            onClick={() => {
-              switch (progress) {
-                case 0:
-                  submitMemeberInfo();
-                  break;
-                case 1:
-                  if (surveyStore.getState().surveyCocktails.length !== 0) {
-                    nextProgress();
-                  } else {
-                    Swal.fire({
-                      title: '최소 1개의 칵테일을 선택해주세요!',
-                      icon: 'warning',
-                    });
-                  }
-                  break;
-                case 2:
-                  if (surveyStore.getState().occassionId !== 0) {
-                    nextProgress();
-                  } else {
-                    Swal.fire({
-                      title: '언제 마시나요!',
-                      icon: 'warning',
-                    });
-                  }
-                  break;
-                case 3:
-                  if (surveyStore.getState().baseId !== 0) {
-                    nextProgress();
-                  } else {
-                    Swal.fire({
-                      title: '베이스를 선택해주세요!',
-                      icon: 'warning',
-                    });
-                  }
-                  break;
-                case 4:
-                  if (surveyStore.getState().alcoholContent !== 0) {
-                    nextProgress();
-                  } else {
-                    Swal.fire({
-                      title: '도수를 선택해주세요!',
-                      icon: 'warning',
-                    });
-                  }
-                  break;
-                default:
-                  break;
-              }
-            }}
-          >
-            다음
-          </button>
-        )}
+        )} */}
+        <button
+          className="next"
+          type="button"
+          onClick={() => {
+            switch (progress) {
+              case 0:
+                submitMemeberInfo();
+                break;
+              case 1:
+                if (surveyStore.getState().surveyCocktails.length !== 0) {
+                  nextProgress();
+                } else {
+                  Swal.fire({
+                    title: '최소 1개의 칵테일을 선택해주세요!',
+                    icon: 'warning',
+                  });
+                }
+                break;
+              case 2:
+                if (surveyStore.getState().occassionId !== 0) {
+                  nextProgress();
+                } else {
+                  Swal.fire({
+                    title: '언제 마시나요!',
+                    icon: 'warning',
+                  });
+                }
+                break;
+              case 3:
+                if (surveyStore.getState().baseId !== 0) {
+                  nextProgress();
+                } else {
+                  Swal.fire({
+                    title: '베이스를 선택해주세요!',
+                    icon: 'warning',
+                  });
+                }
+                break;
+              case 4:
+                if (surveyStore.getState().alcoholContent !== 0) {
+                  nextProgress();
+                } else {
+                  Swal.fire({
+                    title: '도수를 선택해주세요!',
+                    icon: 'warning',
+                  });
+                }
+                break;
+              default:
+                break;
+            }
+          }}
+        >
+          다음
+        </button>
 
         {progress === 5 && (
           <button
@@ -205,17 +201,6 @@ export default function Layout({
             제출
           </button>
         )}
-        {/* {progress === 7 && (
-          <button
-            className="next"
-            type="button"
-            onClick={() => {
-              submitSurvey();
-            }}
-          >
-            홈으로
-          </button>
-        )} */}
       </div>
     </>
   );
