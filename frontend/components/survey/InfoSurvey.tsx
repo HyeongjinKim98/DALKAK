@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 
@@ -22,10 +22,10 @@ export default function InfoSurvey() {
   const setisNicknameChecked = surveyStore(
     (state) => state.setisNicknameChecked,
   );
-  const setisBirthDateChecked = surveyStore(
-    (state) => state.setisBirthDateChecked,
-  );
-  const isBirthDateChecked = surveyStore((state) => state.isBirthDateChecked);
+  // const setisBirthDateChecked = surveyStore(
+  //   (state) => state.setisBirthDateChecked,
+  // );
+  // const isBirthDateChecked = surveyStore((state) => state.isBirthDateChecked);
   const gender = surveyStore((state) => state.gender);
   const setGender = surveyStore((state) => state.setGender);
   const headerConfig = {

@@ -22,7 +22,8 @@ export default function Layout({
   const progress = surveyStore((state) => state.progress);
   const getQuestion = surveyStore((state) => state.getQuestion);
   const nextProgress = surveyStore((state) => state.nextProgress);
-  const beforeProgress = surveyStore((state) => state.beforeProgress);
+  // deprecated
+  // const beforeProgress = surveyStore((state) => state.beforeProgress);
   // const addSurveyIngredients = surveyStore(
   //   (state) => state.addSurveyIngredients,
   // );

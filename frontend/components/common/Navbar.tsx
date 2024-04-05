@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import HomeIcon from '@mui/icons-material/Home';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import styles from './Navbar.module.scss';
 import NavbarTopRank from './NavbarTopRank';
 import { Logout } from '@/apis/Auth';
@@ -12,11 +14,7 @@ import logo from '@/public/assets/imgs/dalkak_logo.png';
 import authStore from '@/store/authStore';
 import memberStore from '@/store/memberStore';
 import useRefrigeratorStore from '@/store/refrigeratorStore';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useRouter } from 'next/navigation';
-import { styled } from '@mui/material';
-
+// import { styled } from '@mui/material';
 // import memberStore from '@/store/memberStore';
 
 export default function Navbar() {
