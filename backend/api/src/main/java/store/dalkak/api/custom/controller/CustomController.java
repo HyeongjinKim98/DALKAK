@@ -33,7 +33,6 @@ public class CustomController {
 
     private final CustomService customService;
 
-    // 로그인한 Member 추가
     @PostMapping
     public ResponseEntity<ApiResponse<String>> createCustomCocktail(
         @RequestPart(value = "image") MultipartFile image,

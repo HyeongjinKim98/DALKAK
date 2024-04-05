@@ -120,10 +120,6 @@ public class CustomServiceImpl implements CustomService {
 
         Custom custom = customRepository.findCustomById(customCocktailId);
 
-//        if(!Objects.equals(userId, custom.getMember().getId())) {
-//            throw new UserException(UserErrorCode.FORBIDDEN);
-//        }
-
         // 새로 들어온 재료 생성
         for(CustomIngredientDto customIngredientDto : customModifyReqDto.getCustomIngredientList()) {
             Unit unit = unitRepository.findUnitById(customIngredientDto.getUnitId());

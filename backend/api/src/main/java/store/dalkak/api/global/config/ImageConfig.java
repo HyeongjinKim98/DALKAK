@@ -50,7 +50,8 @@ public class ImageConfig {
 
         try {
             BufferedImage bufferedImage = ImageIO.read(image.getInputStream());
-            BufferedImage resizedImage = resizeImage(bufferedImage, 450, 450);
+            int height = (bufferedImage.getHeight() * 450) / bufferedImage.getWidth();
+            BufferedImage resizedImage = resizeImage(bufferedImage, 450, height);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ImageIO.write(resizedImage, fileType, outputStream);
             InputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
