@@ -48,8 +48,6 @@ export default async function Oauth({
         accessTokenExpiresIn: data.accessTokenExpiresIn,
         refreshTokenExpiresIn: data.refreshTokenExpiresIn,
       };
-      console.log(response.headers);
-      console.log(responseData);
       if (data.survey_comletion === null) {
         Swal.fire({
           title: '정보 입력이 되지 않아 정보 입력 페이지로 이동합니다.',
@@ -57,11 +55,10 @@ export default async function Oauth({
         });
         redirect('/survey');
       }
-      console.log(tokens);
       redirect('/');
     }
   } catch (error) {
-    // console.log(error);
+    /* empty */
   }
 
   return <Token tokens={tokens} status={status} />;

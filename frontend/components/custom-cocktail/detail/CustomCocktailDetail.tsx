@@ -1,5 +1,7 @@
+'use client';
+
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './CustomCocktailDetail.module.scss';
 
@@ -49,44 +51,57 @@ interface Data {
   open: boolean;
 }
 
-interface ApiResponse {
-  code: number;
-  messages: string[];
-  data: Data;
-}
-
 interface Props {
   customId: number;
 }
 
-const getAccessToken = () => authStore.getState().accessToken;
-const authorization = getAccessToken();
+export default function CustomCocktailDetail({ customId }: Props) {
+  const [customCocktailDetailData, setCustomCocktailDetailData] = useState<
+    Data | number
+  >({
+    custom_ingredients: [],
+    user: {
+      id: 1,
+      nickname: '',
+    },
+    origin_cocktail: {
+      id: 1,
+      name: '',
+      korean_name: '',
+      image: '',
+      heart_count: 0,
+    },
+    id: 1,
+    name: '',
+    image: '',
+    recipe: '',
+    summary: '',
+    comment: '',
+    open: true,
+  });
 
-export async function getData({ customId }: Props) {
-  // console.log(customId);
+  const getAccessToken = () => authStore.getState().accessToken;
+  const authorization = getAccessToken();
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/customs/${customId}`,
-    {
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/customs/${customId}`, {
       headers: {
         authorization,
       },
-    },
-  );
-
-  if (!response.ok) {
-    if (response.status === 403) {
-      return 403;
-    }
-    return 404;
-  }
-  const data: ApiResponse = await response.json();
-  // console.log(data);
-  // console.log(data.data.recipe);
-  return data.data;
-}
-export default async function CustomCocktailDetail({ customId }: Props) {
-  const customCocktailDetailData = await getData({ customId });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          if (response.status === 403) {
+            return 403;
+          }
+          return 404;
+        }
+        return response.json();
+      })
+      .then((result) => {
+        setCustomCocktailDetailData(result.data);
+      });
+  }, [authorization, customId]);
 
   let customIngredients: Custom_Ingredients[] = [];
   let originCocktail: Origin_Cocktail = {
@@ -98,9 +113,9 @@ export default async function CustomCocktailDetail({ customId }: Props) {
   };
   let originCocktailNames: string = '';
 
-  if (customCocktailDetailData !== 403 && customCocktailDetailData !== 404) {
+  if (typeof customCocktailDetailData !== 'number') {
     customIngredients = customCocktailDetailData.custom_ingredients;
-    originCocktail = customCocktailDetailData?.origin_cocktail;
+    originCocktail = customCocktailDetailData.origin_cocktail;
     originCocktailNames = `${originCocktail?.name}, ${originCocktail?.korean_name}`;
   }
 
@@ -108,7 +123,7 @@ export default async function CustomCocktailDetail({ customId }: Props) {
     <div>접근 권한이 없습니다</div>
   ) : customCocktailDetailData === 404 ? (
     <div>게시글을 불러올 수 없습니다</div>
-  ) : (
+  ) : typeof customCocktailDetailData !== 'number' ? (
     <div className={styles['flex-container']}>
       <div className={styles.container}>
         <div className={styles['title-container']}>
@@ -145,5 +160,7 @@ export default async function CustomCocktailDetail({ customId }: Props) {
         </div>
       </div>
     </div>
+  ) : (
+    <div />
   );
 }

@@ -83,25 +83,6 @@ export default function CustomCocktailWrite(props: Props) {
     unit_id: unitId,
   }));
 
-  // const changedRecipe = customRecipe.split('\n\n').join('|');
-
-  // const confirmData = () => {
-  //   // console.log('여기부터');
-  //   // console.log('image');
-  //   // console.log(customImage);
-  //   // console.log(cocktailId);
-  //   // console.log(customName);
-  //   // console.log(customSummary);
-  //   // console.log(customComment);
-  //   console.log(customRecipe);
-  //   console.log(changedRecipe);
-  //   // console.log(open);
-  //   // console.log('>>', inputValues);
-  //   // console.log('>>>', inputUnitValues);
-  //   // console.log(tempList);
-  //   // console.log(filteredList);
-  // };
-
   const infoPlaceholder =
     '추가 설명이나 후기를 알려주세요.\n\n 이런 내용이 들어가면 좋아요!| 이 재료는 다른 걸로 대체할 수 있어요 | - 기존 레시피와 비교해서 맛이 이렇게 달라요 | - 이럴 때 마시는 걸 추천해요';
 
@@ -133,8 +114,6 @@ export default function CustomCocktailWrite(props: Props) {
   useEffect(() => {
     const getBaseCocktailData = async () => {
       const response = await getBaseData();
-      // setKoreanName(response.korean_name);
-      // setEnglishName(await response.name);
       setCustomRecipe(await response.recipe);
       setTempList(await response.cocktail_ingredients);
       setNames(`${response.name}, ${response.korean_name}`);
@@ -331,8 +310,7 @@ export default function CustomCocktailWrite(props: Props) {
         });
       }
     } catch (error) {
-      console.log('서버와 통신 중 오류 발생');
-      console.log(error);
+      /* empty */
     }
   };
   return (

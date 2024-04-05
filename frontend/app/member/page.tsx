@@ -57,7 +57,6 @@ export default function Page() {
       if (response.status === 200) {
         const responseData = await response.json();
         const { data } = responseData;
-        console.log(data);
         setMyCocktails(data.heart_cocktails);
         setCustomCocktails(data.custom_cocktails);
         setMyLikeCocktails(data.heart_cocktails);

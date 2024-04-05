@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import CustomCocktailCard from '@/components/custom-cocktail/CustomCocktailCard';
 import memberStore from '@/store/memberStore';
 import './page.scss';
@@ -41,7 +41,6 @@ export default function Page() {
       if (response.status === 200) {
         const responseData = await response.json();
         const { data } = responseData;
-        console.log(data);
         setMyCocktails(data.custom_cocktails);
       }
     } catch (e) {

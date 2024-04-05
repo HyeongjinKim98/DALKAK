@@ -23,7 +23,6 @@
 // }
 
 // export default function CustomCocktailAddIngredient({ origin }: Props) {
-//   // console.log(origin);
 //   const [tempList, setTempList] = useState<Origin[]>([]);
 //   // const [amount, setAmount] = useState(origin.ingredient_amount)
 //   const [inputValues, setInputValues] = useState<string[]>([]);

@@ -13,7 +13,6 @@ export default function BaseItem({ id, name, imgsrc }: ItemProps) {
     surveyStore.getState().baseId === id,
   );
   useEffect(() => {
-    console.log(name);
     const deselect = surveyStore.subscribe(() => {
       const newSelected = surveyStore.getState().baseId === id;
       setSelected(newSelected);

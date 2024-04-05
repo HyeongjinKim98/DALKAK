@@ -5,17 +5,16 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+import { usePathname } from 'next/navigation';
 import styles from './LikeCount.module.scss';
 
 import emptyheart from '../../public/assets/imgs/emptyheart.png';
 import heartImage from '../../public/assets/imgs/heartImage.png';
 import authStore from '@/store/authStore';
 
-interface Props {
-  cocktailId: number;
-}
-
-export default function LikeCount({ cocktailId }: Props) {
+export default function LikeCount() {
+  const pathName = usePathname();
+  const cocktailId = pathName.split('/')[2];
   const [isLike, setIsLike] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -83,7 +82,6 @@ export default function LikeCount({ cocktailId }: Props) {
         return response.json();
       })
       .then((result) => {
-        // console.log(result.data);
         setIsLike(result.data.heart);
         setCount(result.data.heart_count);
       })

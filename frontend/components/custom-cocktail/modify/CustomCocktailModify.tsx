@@ -20,8 +20,6 @@ import CustomCocktailAddRecipe from '@/components/custom-cocktail/write/CustomCo
 import CustomCocktailImageUpload from '@/components/custom-cocktail/write/CustomCocktailImageUpload';
 import CustomCocktailInput from '@/components/custom-cocktail/write/CustomCocktailInput';
 import authStore from '@/store/authStore';
-// import { error } from 'console';
-// import { RepeatOneSharp } from '@mui/icons-material';
 
 interface Unit {
   id: number;
@@ -122,7 +120,6 @@ export default function CustomCocktailModify(props: Props) {
       setCustomSummary(await response.summary);
       setCustomComment(await response.comment);
       setIsPublic(await response.open);
-      // console.log(response);
     };
     getBaseCocktailData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -279,14 +276,11 @@ export default function CustomCocktailModify(props: Props) {
         );
         if (response.ok) {
           // eslint-disable-next-line no-alert
-          // console.log(formData);
           router.push(`/cocktail/detail?id=${customId}`);
         } else {
           // eslint-disable-next-line no-console
-          console.error('커스텀 레시피 수정 실패');
+          throw new Error('Failed to fetch data');
           // eslint-disable-next-line no-console
-          // console.log(response);
-          // console.log(formData);
         }
       } else {
         // if (!customImage) {
@@ -321,8 +315,7 @@ export default function CustomCocktailModify(props: Props) {
         }
       }
     } catch (error) {
-      console.log('서버와 통신 중 오류 발생');
-      console.log(error);
+      /* empty */
     }
   };
   return (

@@ -33,7 +33,7 @@ export default function Navbar() {
         window.location.replace('/');
       }
     } catch (error) {
-      console.log(error);
+      /* empty */
     }
   };
 

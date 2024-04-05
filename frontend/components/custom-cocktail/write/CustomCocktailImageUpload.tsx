@@ -15,18 +15,7 @@ interface Props {
 export default function CustomCocktailImageUpload(props: Props) {
   const { handleImageProps, uploadedImage } = props;
   const [image, setImage] = useState<string | null>(uploadedImage || null);
-  // const [tempImage, setTempImage] = useState<string | null>(
-  //   uploadedImage || null,
-  // );
   const fileInput = useRef<HTMLInputElement>(null);
-
-  // console.log(uploadedImage);
-  // useEffect(() => {
-
-  //   if (uploadedImage) {
-  //     setImage(uploadedImage);
-  //   }
-  // }, []);
 
   const handleUploadImage = () => {
     if (fileInput.current != null) {
@@ -36,8 +25,6 @@ export default function CustomCocktailImageUpload(props: Props) {
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-    // console.log('이거다 이거');
-    // console.log(file);
     handleImageProps(file);
 
     if (!file) return;
