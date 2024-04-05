@@ -5,6 +5,7 @@
 import React from 'react';
 
 import { Favorite } from '@mui/icons-material';
+import Image from 'next/image';
 import Link from 'next/link';
 import styles from './CocktailCard.module.scss';
 import authStore from '@/store/authStore';
@@ -36,7 +37,14 @@ export default function CocktailCard(props: ICocktailType) {
     <Link href={`/cocktail/${id}/`}>
       <button type="button" className={styles.container} onClick={createLog}>
         <div className={styles.image}>
-          <img src={image} alt={name} />
+          <Image
+            src={image}
+            alt={name}
+            width={500}
+            height={500}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP89B8AAukB8/71MdcAAAAASUVORK5CYII="
+          />
         </div>
         <div className={styles.title}>
           <div className={styles.name}>
