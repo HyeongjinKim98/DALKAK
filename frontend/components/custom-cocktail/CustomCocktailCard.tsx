@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-
+import Image from 'next/image';
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
 
@@ -37,11 +37,15 @@ export default function CustomCocktailCard({ custom, type }: Props) {
     <Link href={{ pathname: '/cocktail/detail', query: { id: custom.id } }}>
       <div className={styles['grid-item']}>
         <div className={styles['image-box']}>
-          <img
-            className={previewImageName}
-            src={custom.image}
-            alt={custom.name}
-          />
+          <div className={previewImageName}>
+            <Image
+              // className={previewImageName}
+              src={custom.image}
+              alt={custom.name}
+              width={375}
+              height={375}
+            />
+          </div>
           <div className={styles.author}>by {custom.user.nickname}</div>
         </div>
         <div className={previewTitleName}>{custom.name}</div>

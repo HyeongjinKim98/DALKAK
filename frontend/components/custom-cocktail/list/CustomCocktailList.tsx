@@ -7,7 +7,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import styles from './CustomCocktailList.module.scss';
 
-import UpperLineBannerCustomList from '@/components/common/UpperLineBannerCustomList';
+// import UpperLineBannerCustomList from '@/components/common/UpperLineBannerCustomList';
+import UpperLineBanner from '@/components/common/UpperLineBanner';
 import CustomCocktailCardWrapper from '@/components/custom-cocktail/CustomCocktailCardWrapper';
 import CustomCocktailPagination from '@/components/custom-cocktail/list/CustomCocktailPagination';
 import authStore from '@/store/authStore';
@@ -91,7 +92,7 @@ export default function CustomCocktailList(props: Props) {
       {/* <button type="button" onClick={confirm}>
         커스텀확인
       </button> */}
-      <UpperLineBannerCustomList
+      <UpperLineBanner
         frontText={customAllData && customAllData.cocktail_name}
         secondText="를 활용한 다른 회원들의 색다른 레시피를 확인해보세요!"
         cocktailId={cocktailId}
