@@ -92,9 +92,21 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   setIsOpen(!isOpen);
+                  console.log(isOpen);
                 }}
               >
-                {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                <KeyboardArrowDownIcon
+                  className={`${isOpen ? styles.open : styles.close}`}
+                />
+                {/* {isOpen ? (
+                  <KeyboardArrowUpIcon
+                    className={`${isOpen ? styles.rotate : ''}`}
+                  />
+                ) : (
+                  <KeyboardArrowDownIcon
+                    className={`${isOpen ? styles.rotate : ''}`}
+                  />
+                )} */}
               </button>
               {/* <button
                 className={styles.btn}
