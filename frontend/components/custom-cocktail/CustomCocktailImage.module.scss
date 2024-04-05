@@ -1,5 +1,11 @@
-.custom-img {
+.wrapper {
   border-radius: 10%;
   width: 19vw;
   height: 19vw;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
 }

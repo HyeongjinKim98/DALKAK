@@ -1,10 +1,12 @@
 .container {
   display: flex;
-  height: 100%;
+  height: 75vh;
 }
 
 .container-outer {
-  flex: 97;
+  // flex: 97;
+  height: 75vh;
+  width: 40vw;
   background-color: var(--color-base);
   display: flex;
   align-items: flex-end;
@@ -12,18 +14,16 @@
 
   .container-inner {
     background-color: white;
-    width: 95%;
-    height: 95%;
+    width: 30vw;
+    height: 72vh;
     border-radius: 0 10px 0 0;
-    overflow: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 2vw;
 
     .inside {
-      width: calc(100% - 4vw);
-      height: fit-content;
-      overflow: auto;
+      width: 95%;
+      height: 65vh;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;

@@ -3,21 +3,35 @@
   display: flex;
   align-items: flex-end;
   cursor: pointer;
+  position: relative;
 
   .image-wrapper {
     height: 100%;
-    margin-right: 2vw;
+    margin-right: 20px;
     display: flex;
     align-items: flex-end;
+    position: relative;
 
-    img {
+    .tools {
       width: auto;
-      height: 8vh;
+      height: 100px;
+      position: absolute;
+    }
+
+    .firework {
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 0px;
+      bottom: 60px;
+      transition: 0.3s;
     }
   }
 
   .text-container {
     margin-bottom: 10px;
+    position: relative;
+    left: 90px;
 
     h3 {
       font-size: 0.8rem;
@@ -36,6 +50,13 @@
 .container:hover {
   h3 {
     color: var(--color-point);
+    transition: 0.3s;
+  }
+  .firework {
+    width: auto;
+    height: 100px;
+    left: -40px;
+    bottom: 20px;
     transition: 0.3s;
   }
 }
