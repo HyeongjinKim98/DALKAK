@@ -98,7 +98,7 @@ export default function Navbar() {
                 <KeyboardArrowDownIcon
                   className={`${isOpen ? styles.open : styles.close}`}
                 />
-                {/* {isOpen ? (
+                {/* {ilsOpen ? (
                   <KeyboardArrowUpIcon
                     className={`${isOpen ? styles.rotate : ''}`}
                   />
@@ -135,7 +135,29 @@ export default function Navbar() {
           >
             회원정보
           </button>
-          <button type="button" onClick={() => LogoutFunction()}>
+          <button
+            type="button"
+            onClick={() => {
+              router.push('/member/like');
+              setIsOpen(false);
+            }}
+          >
+            좋아요
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              router.push('/member/custom');
+              setIsOpen(false);
+            }}
+          >
+            커스텀
+          </button>
+          <button
+            className={styles.logout}
+            type="button"
+            onClick={() => LogoutFunction()}
+          >
             로그아웃
           </button>
         </div>
