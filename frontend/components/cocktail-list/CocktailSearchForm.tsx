@@ -103,7 +103,7 @@ export default function CocktailSearchForm() {
     clearAll,
   } = useSearchStore();
 
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const handleCocktailName = (e: ChangeEvent<HTMLInputElement>) => {
     setCocktailName(e.target.value);
   };
