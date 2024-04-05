@@ -18,16 +18,21 @@ import surveyStore from '@/store/surveyStore';
 export default function InfoSurvey() {
   const accessToken = authStore((state) => state.accessToken);
   const setNickname = surveyStore((state) => state.setNickname);
-  const setbirthDate = surveyStore((state) => state.setBirthDate);
+  const setBirthDate = surveyStore((state) => state.setBirthDate);
+  const setisNicknameChecked = surveyStore(
+    (state) => state.setisNicknameChecked,
+  );
+  const setisBirthDateChecked = surveyStore(
+    (state) => state.setisBirthDateChecked,
+  );
+  const isBirthDateChecked = surveyStore((state) => state.isBirthDateChecked);
   const gender = surveyStore((state) => state.gender);
   const setGender = surveyStore((state) => state.setGender);
-
   const headerConfig = {
     headers: {
       Authorization: accessToken,
     },
   };
-  const [isNicknameChecked, setIsNicknameChecked] = useState<boolean>(false);
 
   const setMemberInfoHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -39,7 +44,7 @@ export default function InfoSurvey() {
         setNickname(value);
         break;
       case 'birth':
-        setbirthDate(value);
+        setBirthDate(value);
         break;
       case 'gender':
         setGender(value);
@@ -58,14 +63,14 @@ export default function InfoSurvey() {
         headerConfig,
       )
       .then(() => {
-        setIsNicknameChecked(true);
-
+        setisNicknameChecked(true);
         Swal.fire({
           title: '사용 가능한 닉네임입니다',
           icon: 'success',
         });
       })
       .catch(() => {
+        setisNicknameChecked(false);
         Swal.fire({
           title: '중복된 닉네임입니다',
           icon: 'warning',
@@ -79,30 +84,39 @@ export default function InfoSurvey() {
         title: '닉네임을 입력해주세요!',
         icon: 'warning',
       });
-      return false;
+      setisNicknameChecked(false);
+      return;
     }
-    if (nickname.length > 11 || nickname.length < 3) {
+    if (nickname.length > 20 || nickname.length < 3) {
       Swal.fire({
-        title: '닉네임은 3자 이상 10자 이하로 입력해주세요!',
+        title: '닉네임은 3자 이상 20자 이하\n로 입력해주세요!',
         icon: 'warning',
       });
-      return false;
+      setisNicknameChecked(false);
+      return;
     }
-    if (/^[가-힣A-Za-z0-9]+$/.test(nickname)) {
+    if (/^[가-힣a-zA-Z0-9]+$/.test(nickname) === false) {
       Swal.fire({
-        title: '특수문자는 사용이 불가능해요!',
+        title: '특수문자/홀문자/공백은(는)\n사용이 불가능해요!',
         icon: 'warning',
       });
-      return false;
+      setisNicknameChecked(false);
+      return;
     }
+    setisNicknameChecked(true);
     checkNickname();
-
-    return isNicknameChecked;
   };
 
-  // const isValidated = () => {
-  //   const { birthDate } = surveyStore.getState;
-  //   if (!/^\d{8}$/.test(birthDate)) return false;
+  // const checkDate = () => {
+  //   const { birthDate } = surveyStore.getState();
+  //   if (!/^\d{8}$/.test(birthDate)) {
+  //     setisBirthDateChecked(false);
+  //     return;
+  //     Swal.fire({
+  //       title: '생년월일을 다시 입력해주세요!',
+  //       icon: 'warning',
+  //     });
+  //   }
 
   //   const year = parseInt(birthDate.substring(0, 4), 10);
   //   const month = parseInt(birthDate.substring(4, 6), 10) - 1;
@@ -114,9 +128,12 @@ export default function InfoSurvey() {
   //     newDate.getMonth() !== month ||
   //     newDate.getDate() !== day
   //   ) {
-  //     return false;
+  //     setisBirthDateChecked(false);
+  //     Swal.fire({
+  //       title: '생년월일을 다시 입력해주세요!',
+  //       icon: 'warning',
+  //     });
   //   }
-  //   return true;
   // };
   return (
     <div className="wrapper">
