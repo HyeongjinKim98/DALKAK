@@ -36,18 +36,30 @@
         line-height: 5vh;
         display: flex;
         align-items: center;
+
+        // div {
+        //   min-width: 3vw;
+        // }
       }
 
       img {
         width: 5vh;
         height: 3.5vh;
+        min-width: 20px;
       }
     }
 
     .pages {
       display: flex;
 
-      div {
+      .min-width {
+        min-width: 60px;
+        text-align: center;
+        padding: 0 2vw;
+      }
+
+      .min-width2 {
+        min-width: 35px;
         text-align: center;
         padding: 0 2vw;
       }
@@ -58,6 +70,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
     // margin-right: 9vw;
     // .fix {
     //   margin-right: 1vw;
@@ -65,6 +78,8 @@
 
     .rank-text {
       margin-right: 2vw;
+      // min-width: 28vw;
+      min-width: 140px;
     }
   }
 
@@ -74,6 +89,7 @@
 
     .rank {
       margin-left: 2vw;
+      min-width: 120px;
     }
   }
 
@@ -91,14 +107,17 @@
     .nickname {
       color: var(--color-point);
       font-weight: 700;
+      min-width: 100px;
     }
 
     .niceto {
       margin-right: 2vw;
+      min-width: 65px;
     }
 
     svg {
       margin: 0 2vw 0 1vw;
+      min-width: 30px;
     }
   }
 }
@@ -124,4 +143,5 @@
   &:hover {
     cursor: pointer;
   }
+  min-width: 50px;
 }

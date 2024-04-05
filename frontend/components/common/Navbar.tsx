@@ -52,7 +52,7 @@ export default function Navbar() {
         <div className={styles.pages}>
           <Link href={isLoggedIn ? '/cocktail' : '/oauth'}>
             <div
-              className={pathName?.startsWith('/cocktail') ? styles.active : ''}
+              className={`${pathName?.startsWith('/cocktail') ? styles.active : ''} ${styles['min-width']}`}
             >
               칵테일 목록
             </div>
@@ -60,7 +60,7 @@ export default function Navbar() {
 
           <Link href={isLoggedIn ? '/storage' : '/oauth'}>
             <div
-              className={pathName?.startsWith('/storage') ? styles.active : ''}
+              className={`${pathName?.startsWith('/storage') ? styles.active : ''} ${styles['min-width2']}`}
             >
               냉장고
             </div>
