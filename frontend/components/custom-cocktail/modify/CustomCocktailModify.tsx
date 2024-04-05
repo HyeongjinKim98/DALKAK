@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 import styles from './CustomCocktailModify.module.scss';
 
 import BtnWithIcon from '@/components/common/BtnWithIcon';
-import CustomCocktailAddIngredientTest from '@/components/custom-cocktail/write/CustomCocktailAddIngredientTest';
+import CustomCocktailAddIngredient from '@/components/custom-cocktail/write/CustomCocktailAddIngredient';
 import CustomCocktailAddRecipe from '@/components/custom-cocktail/write/CustomCocktailAddRecipe';
 import CustomCocktailImageUpload from '@/components/custom-cocktail/write/CustomCocktailImageUpload';
 import CustomCocktailInput from '@/components/custom-cocktail/write/CustomCocktailInput';
@@ -387,7 +387,7 @@ export default function CustomCocktailModify(props: Props) {
             </div>
           </div>
           <div className={styles.space}>
-            <CustomCocktailAddIngredientTest
+            <CustomCocktailAddIngredient
               handleInputChangeTest={handleInputChangeTest}
               handleUnitInputChange={handleUnitInputChange}
               removeItem={removeItem}
