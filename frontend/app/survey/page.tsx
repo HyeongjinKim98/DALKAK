@@ -24,6 +24,7 @@ export default function Survey() {
       Swal.fire({
         title: '로그인이 필요합니다',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
       window.location.replace('/oauth');
       alert('로그인이 필요합니다');
