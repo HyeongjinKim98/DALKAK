@@ -48,8 +48,10 @@ export default function CustomCocktailCard({ custom, type }: Props) {
               // className={previewImageName}
               src={custom.image}
               alt={custom.name}
-              width={375}
-              height={375}
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: 'auto', height: 'auto' }}
             />
           </div>
           {type !== 'member' && (
