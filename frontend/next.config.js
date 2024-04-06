@@ -3,7 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   distDir: 'build',
-  // output: 'export',
+  output: 'export',
   trailingSlash: true,
   experimental: {
     missingSuspenseWithCSRBailout: false,
