@@ -52,6 +52,7 @@ export default async function Oauth({
         Swal.fire({
           title: '정보 입력이 되지 않아 정보 입력 페이지로 이동합니다.',
           icon: 'warning',
+          confirmButtonColor: '#ff7169',
         });
         redirect('/survey');
       }

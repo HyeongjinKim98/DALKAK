@@ -66,6 +66,7 @@ export default function Page() {
         Swal.fire({
           title: '로그인이 필요합니다',
           icon: 'warning',
+          confirmButtonColor: '#ff7169',
         });
         window.location.replace('/oauth');
       }
@@ -73,6 +74,7 @@ export default function Page() {
       Swal.fire({
         title: '프로필을 불러오는데 실패하였습니다.',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
     } finally {
       setLoading(false);

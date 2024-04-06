@@ -25,13 +25,19 @@ interface Props {
 
 export default function CustomCocktailCard({ custom, type }: Props) {
   const previewImageName =
-    type === 'big' ? styles['custom-img'] : styles['custom-img-preview'];
+    type === 'big' || type === 'member'
+      ? styles['custom-img']
+      : styles['custom-img-preview'];
 
   const previewTitleName =
-    type === 'big' ? styles.title : styles['title-preview'];
+    type === 'big' || type === 'member'
+      ? styles.title
+      : styles['title-preview'];
 
   const previewCommentName =
-    type === 'big' ? styles.comment : styles['comment-preview'];
+    type === 'big' || type === 'member'
+      ? styles.comment
+      : styles['comment-preview'];
 
   return (
     <Link href={{ pathname: '/cocktail/detail', query: { id: custom.id } }}>
@@ -42,11 +48,15 @@ export default function CustomCocktailCard({ custom, type }: Props) {
               // className={previewImageName}
               src={custom.image}
               alt={custom.name}
-              width={375}
-              height={375}
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: 'auto', height: 'auto' }}
             />
           </div>
-          <div className={styles.author}>by {custom.user.nickname}</div>
+          {type !== 'member' && (
+            <div className={styles.author}>by {custom.user.nickname}</div>
+          )}
         </div>
         <div className={previewTitleName}>{custom.name}</div>
         <div className={previewCommentName}>{custom.summary}</div>

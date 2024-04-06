@@ -12,8 +12,10 @@ export default function CustomCocktailImage({ customImage }: Props) {
       <Image
         src={customImage}
         alt="커스텀 칵테일 이미지"
-        width={375}
-        height={375}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: 'auto', height: 'auto' }}
       />
     </div>
   );

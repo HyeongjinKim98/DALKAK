@@ -67,6 +67,7 @@ export default function InfoSurvey() {
         Swal.fire({
           title: '사용 가능한 닉네임입니다',
           icon: 'success',
+          confirmButtonColor: '#ff7169',
         });
       })
       .catch(() => {
@@ -74,6 +75,7 @@ export default function InfoSurvey() {
         Swal.fire({
           title: '중복된 닉네임입니다',
           icon: 'warning',
+          confirmButtonColor: '#ff7169',
         });
       });
   };
@@ -83,6 +85,7 @@ export default function InfoSurvey() {
       Swal.fire({
         title: '닉네임을 입력해주세요!',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
       setisNicknameChecked(false);
       return;
@@ -91,6 +94,7 @@ export default function InfoSurvey() {
       Swal.fire({
         title: '닉네임은 3자 이상 20자 이하\n로 입력해주세요!',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
       setisNicknameChecked(false);
       return;
@@ -99,6 +103,7 @@ export default function InfoSurvey() {
       Swal.fire({
         title: '특수문자/홀문자/공백은(는)\n사용이 불가능해요!',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
       setisNicknameChecked(false);
       return;

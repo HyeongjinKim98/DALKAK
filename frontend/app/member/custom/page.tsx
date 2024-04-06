@@ -63,7 +63,11 @@ export default function Page() {
       <h2>{nickname} 님이 만든 커스텀 칵테일이에요!</h2>
       <div className="grid">
         {myCocktails?.map((cocktail: ICustom) => (
-          <CustomCocktailCard key={cocktail.id} custom={cocktail} type="big" />
+          <CustomCocktailCard
+            key={cocktail.id}
+            custom={cocktail}
+            type="member"
+          />
         ))}
       </div>
     </div>

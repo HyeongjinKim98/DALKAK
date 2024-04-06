@@ -56,9 +56,7 @@ export default function Navbar() {
           <div className={styles.pages}>
             <Link href={isLoggedIn ? '/cocktail' : '/oauth'}>
               <div
-                className={
-                  pathName?.startsWith('/cocktail') ? styles.active : ''
-                }
+                className={`${pathName?.startsWith('/cocktail') ? styles.active : ''} ${styles['min-width']}`}
               >
                 칵테일 목록
               </div>
@@ -66,27 +64,28 @@ export default function Navbar() {
 
             <Link href={isLoggedIn ? '/storage' : '/oauth'}>
               <div
-                className={
-                  pathName?.startsWith('/storage') ? styles.active : ''
-                }
+                className={`${pathName?.startsWith('/storage') ? styles.active : ''} ${styles['min-width2']}`}
               >
                 냉장고
               </div>
             </Link>
           </div>
         </div>
-        <div className={styles.center}>
-          <div className={styles.fix}>
-            현재 가장 인기 있는 칵테일&nbsp;&nbsp;|&nbsp;&nbsp;
-          </div>
-          <div>
+        <div className={styles['center-left']}>
+          <div className={styles['rank-text']}>현재 가장 인기 있는 칵테일</div>
+          <div>|</div>
+        </div>
+
+        <div className={styles['center-right']}>
+          <div className={styles.rank}>
             <NavbarTopRank />
           </div>
         </div>
         <div className={styles.right}>
           {isLoggedIn ? (
             <>
-              <div className={styles.nickname}>{userNickname}</div>님 반가워요!
+              <div className={styles.nickname}>{userNickname}</div>
+              <div className={styles.niceto}>님 반가워요!</div>
               <button
                 className={styles.dropdown}
                 type="button"
