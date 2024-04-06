@@ -278,6 +278,11 @@ export default function CustomCocktailModify(props: Props) {
         );
         if (response.ok) {
           // eslint-disable-next-line no-alert
+          Swal.fire({
+            title: '커스텀 칵테일이 수정되었습니다.',
+            icon: 'success',
+            confirmButtonColor: '#ff7169',
+          });
           router.push(`/cocktail/detail?id=${customId}`);
         } else {
           // eslint-disable-next-line no-console
