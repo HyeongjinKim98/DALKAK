@@ -172,7 +172,7 @@ export default function Page() {
               <CustomCocktailCard
                 key={cocktail.id}
                 custom={cocktail}
-                type="big"
+                type="member"
               />
             ))}
             {customCocktails.length === 0 && (
