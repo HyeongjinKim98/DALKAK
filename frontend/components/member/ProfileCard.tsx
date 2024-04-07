@@ -13,6 +13,7 @@ import { redirect } from 'next/navigation';
 import Swal from 'sweetalert2';
 import BtnWithIcon from '../common/BtnWithIcon';
 import authStore from '@/store/authStore';
+import { DataObject } from '@mui/icons-material';
 
 interface ICard {
   nickname: string;
@@ -79,17 +80,19 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
     // eslint-disable-next-line consistent-return
     return true;
   };
-  const formatDate = (dateFormat: number[]) => {
-    const year = dateFormat[0];
-    const month = dateFormat[1];
-    const day = dateFormat[2];
+  const parseDateToString = (dateString: string) => {
+    if (!dateString || dateString.trim().length === 0) {
+      return '19900101';
+    }
+    const dateParts = dateString.match(/\d+/g)?.map(Number);
+    if (!dateParts) {
+      return '19900101';
+    }
+    const year = dateParts[0];
+    const month = dateParts[1].toString().padStart(2, '0'); // 한 자리 숫자일 경우 앞에 '0'을 붙임
+    const day = dateParts[2].toString().padStart(2, '0'); // 한 자리 숫자일 경우 앞에 '0'을 붙임
 
-    const monthString =
-      month < 10 ? `0${month.toString()}` : `${month.toString()}`;
-    const dayString = day < 10 ? `0${day.toString()} ` : `${day.toString()}`;
-
-    // YYYYMMDD 형식으로 문자열 결합
-    return `${year}${monthString}${dayString}`;
+    return `${year}-${month}-${day}`;
   };
 
   const checkNickname = async (input: string) => {
@@ -126,10 +129,14 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
     } else {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/profile`, {
         method: 'PATCH',
-        headers: headerConfig.headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
-          nickname,
-          birth_date: formatDate(info.birth_date.split('-').map(Number)),
+          nickname: info.nickname,
+          birth_date: parseDateToString(info.birth_date),
+          gender: info.gender,
         }),
       })
         .then(() => {
@@ -140,7 +147,6 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
           });
 
           setOnEdit(false);
-          redirect('/member');
         })
         .catch((err) => {
           throw err;
