@@ -12,6 +12,7 @@ import BtnWithIcon from '@/components/common/BtnWithIcon';
 import CustomCocktailCard from '@/components/custom-cocktail/CustomCocktailCard';
 import ProfileCard from '@/components/member/ProfileCard';
 import memberStore from '@/store/memberStore';
+import NoContent from '@/components/common/NoContent';
 
 import './page.scss';
 
@@ -117,7 +118,11 @@ export default function Page() {
           </div>
           {visitedCocktails.length === 0 && (
             <div className="no-content-like">
-              <h3>최근 조회한 칵테일이 없습니다</h3>
+              <NoContent
+                title="Oops!"
+                line1="아직 아무 칵테일도 조회하지 않았군요"
+                line2="지금 달칵의 다양한 칵테일을 즐겨보세요!"
+              />
             </div>
           )}
         </div>
@@ -148,7 +153,11 @@ export default function Page() {
             ))}
             {myCocktails.length === 0 && (
               <div className="no-content-like">
-                <h3>좋아요 누른 칵테일이 없습니다.</h3>
+                <NoContent
+                  title="Oops!"
+                  line1="아직 좋아하는 칵테일이 없어요.."
+                  line2="마음에 드는 칵테일의 좋아요를 눌러보세요!"
+                />
               </div>
             )}
           </div>
@@ -176,9 +185,11 @@ export default function Page() {
               />
             ))}
             {customCocktails.length === 0 && (
-              <div className="no-content-like">
-                <h3>내 커스텀 칵테일이 없습니다.</h3>
-              </div>
+              <NoContent
+                title="Oops!"
+                line1="ㅇㅅㅇ? 아직 커스텀 칵테일이 없어요.."
+                line2="당신만의 커스텀 칵테일을 공유해주세요!"
+              />
             )}
           </div>
         </div>

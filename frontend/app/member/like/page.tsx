@@ -10,6 +10,8 @@ import './page.scss';
 import authStore from '@/store/authStore';
 // eslint-disable-next-line import/order
 import ReactPaginate from 'react-paginate';
+// eslint-disable-next-line import/order
+import Loading from '@/components/common/Loading';
 
 interface ICocktailType {
   id: number;
@@ -62,7 +64,9 @@ export default function Page() {
   };
 
   if (loading) {
-    return <div>로딩 중...</div>;
+    return (
+      <Loading text1="잠시만 기다려주세요!" text2="칵테일을 불러오는 중입니다." />
+    );
   }
   return (
     <div className="wrapper">

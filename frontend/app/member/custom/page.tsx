@@ -10,6 +10,8 @@ import './page.scss';
 import authStore from '@/store/authStore';
 // eslint-disable-next-line import/order
 import ReactPaginate from 'react-paginate';
+// eslint-disable-next-line import/order
+import Loading from '@/components/common/Loading';
 
 interface ICustom {
   id: number;
@@ -64,7 +66,11 @@ export default function Page() {
     setPage(selectedItem.selected + 1);
   };
   if (loading) {
-    return <div>로딩 중...</div>;
+    if (loading) {
+      return (
+        <Loading text1="잠시만 기다려주세요!" text2="칵테일을 불러오는 중입니다." />
+      );
+    }
   }
   return (
     <div className="wrapper">

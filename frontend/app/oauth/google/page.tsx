@@ -9,6 +9,7 @@ import {
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import { ResponseData, AuthResponse } from '../types';
+import Loading from '@/components/common/Loading';
 import authStore from '@/store/authStore';
 // import { Login } from '@/apis/Auth';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -53,5 +54,7 @@ export default function Page() {
       });
   };
 
-  return <div>redirect...</div>;
+  return (
+    <Loading text1="로그인 중입니다!" text2="조금만 기다려주세요!" />
+  );
 }
