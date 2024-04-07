@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 
+import styles from '../../../components/cocktail-list/CocktailPagination.module.scss';
 import CustomCocktailCard from '@/components/custom-cocktail/CustomCocktailCard';
 import memberStore from '@/store/memberStore';
 import './page.scss';
 // eslint-disable-next-line import/order
 import authStore from '@/store/authStore';
 // eslint-disable-next-line import/order
+import ReactPaginate from 'react-paginate';
 
 interface ICustom {
   id: number;
@@ -23,6 +25,8 @@ export default function Page() {
   const nickname = memberStore((state) => state.nickname);
   const [myCocktails, setMyCocktails] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   const getAccessToken = () => authStore.getState().accessToken;
   const loadCocktails = async () => {
     setLoading(true);
@@ -42,6 +46,7 @@ export default function Page() {
         const responseData = await response.json();
         const { data } = responseData;
         setMyCocktails(data.custom_cocktails);
+        setTotalPage(data.total_page);
       }
     } catch (e) {
       console.error(e);
@@ -53,8 +58,11 @@ export default function Page() {
   useEffect(() => {
     loadCocktails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page]);
 
+  const pagnate = (selectedItem: { selected: number }) => {
+    setPage(selectedItem.selected + 1);
+  };
   if (loading) {
     return <div>로딩 중...</div>;
   }
@@ -70,6 +78,23 @@ export default function Page() {
           />
         ))}
       </div>
+      <ReactPaginate
+        breakLabel="..."
+        previousLabel="<"
+        nextLabel=">"
+        forcePage={page - 1}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        pageCount={totalPage}
+        onPageChange={pagnate}
+        containerClassName={styles.pagination}
+        pageClassName={styles['pagination-page']}
+        previousClassName={styles['pagination-prev']}
+        nextClassName={styles['pagination-next']}
+        previousLinkClassName={styles['pagination-link']}
+        nextLinkClassName={styles['pagination-link']}
+        activeClassName={styles['pagination-link-active']}
+      />
     </div>
   );
 }
