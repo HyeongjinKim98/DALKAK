@@ -82,8 +82,14 @@ export default function Layout({
   };
 
   const submit = async () => {
-    const { surveyCocktails, occassionId, baseId, alcoholContent, sweetness, surveyIngredients } =
-      surveyStore.getState();
+    const {
+      surveyCocktails,
+      occassionId,
+      baseId,
+      alcoholContent,
+      sweetness,
+      surveyIngredients,
+    } = surveyStore.getState();
 
     if (sweetness === 0) {
       Swal.fire({
@@ -101,7 +107,9 @@ export default function Layout({
         base_id: baseId,
         alcohol_content: alcoholContent,
         sweetness,
-        survey_ingredients: surveyIngredients.map((ingredient) => ingredient.id),
+        survey_ingredients: surveyIngredients.map(
+          (ingredient) => ingredient.id,
+        ),
       });
       if (response.status === 201) {
         Swal.fire({
@@ -137,7 +145,7 @@ export default function Layout({
             이전
           </button>
         )} */}
-        {(progress < 6) && (
+        {progress < 6 && (
           <button
             className="next"
             type="button"
@@ -216,6 +224,7 @@ export default function Layout({
             type="button"
             onClick={() => {
               submit();
+              clearSurvey();
             }}
           >
             제출

@@ -9,6 +9,7 @@ import axios from 'axios';
 import Image from 'next/image';
 // eslint-disable-next-line import/order
 import { useState, useEffect } from 'react';
+import { redirect } from 'next/navigation';
 import Swal from 'sweetalert2';
 import BtnWithIcon from '../common/BtnWithIcon';
 import authStore from '@/store/authStore';
@@ -37,19 +38,11 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
 
   const [onEdit, setOnEdit] = useState(false);
 
-  const handleNicknameChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setinfo({ ...info, nickname: e.target.value });
   };
-  const handleBirthDateChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setinfo({ ...info, birth_date: e.target.value });
-  };
-
-  const EditInfo = () => {
-    // eslint-disable-next-line no-use-before-define
-    // eslint-disable-next-line no-use-before-define
-    if (!validateNickname(info.nickname)) return;
-    // eslint-disable-next-line no-use-before-define
-    checkNickname();
   };
 
   const headerConfig = {
@@ -58,7 +51,7 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
     },
   };
   // eslint-disable-next-line no-shadow
-  const validateNickname = (nickname : string) => {
+  const validateNickname = (nickname: string) => {
     if (nickname === '') {
       Swal.fire({
         title: '닉네임을 입력해주세요!',
@@ -86,8 +79,21 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
     // eslint-disable-next-line consistent-return
     return true;
   };
-  const checkNickname = async () => {
-    if (validateNickname() === false) return;
+  const formatDate = (dateFormat: number[]) => {
+    const year = dateFormat[0];
+    const month = dateFormat[1];
+    const day = dateFormat[2];
+
+    const monthString =
+      month < 10 ? `0${month.toString()}` : `${month.toString()}`;
+    const dayString = day < 10 ? `0${day.toString()} ` : `${day.toString()}`;
+
+    // YYYYMMDD 형식으로 문자열 결합
+    return `${year}${monthString}${dayString}`;
+  };
+
+  const checkNickname = async (input: string) => {
+    if (validateNickname(input) === false) return;
     await axios
       .post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/users/profile/dupcheck`,
@@ -110,6 +116,36 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
           confirmButtonColor: '#ff7169',
         });
       });
+
+    if (info.nickname === '' || info.birth_date === '' || info.gender === '') {
+      Swal.fire({
+        title: '모든 항목을 입력해주세요',
+        icon: 'warning',
+        confirmButtonColor: '#ff7169',
+      });
+    } else {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/profile`, {
+        method: 'PATCH',
+        headers: headerConfig.headers,
+        body: JSON.stringify({
+          nickname,
+          birth_date: formatDate(info.birth_date.split('-').map(Number)),
+        }),
+      })
+        .then(() => {
+          Swal.fire({
+            title: '정보가 변경되었습니다!',
+            icon: 'success',
+            confirmButtonColor: '#ff7169',
+          });
+
+          setOnEdit(false);
+          redirect('/member');
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
   };
   return (
     <div className="card">
@@ -117,7 +153,11 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
         <div className="wrapper">
           <div className="label">별명</div>
           {onEdit ? (
-            <input className="nickname " value={info.nickname} onChange={handleNicknameChange} />
+            <input
+              className="nickname "
+              value={info.nickname}
+              onChange={handleNicknameChange}
+            />
           ) : (
             <div className="nickname">{info.nickname}</div>
           )}
@@ -125,7 +165,11 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
         <div className="wrapper">
           <div className="label">생일</div>
           {onEdit ? (
-            <input className="birth_date" value={info.birth_date} onChange={handleBirthDateChange}/>
+            <input
+              className="birth_date"
+              value={info.birth_date}
+              onChange={handleBirthDateChange}
+            />
           ) : (
             <div className="birth_date">{info.birth_date}</div>
           )}
@@ -150,7 +194,7 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
               icon={SaveIcon}
               text="저장"
               btnStyle="empty-dark"
-              handleOnClick={EditInfo}
+              handleOnClick={() => checkNickname(nickname)}
             />
           </>
         ) : (
@@ -160,7 +204,8 @@ export default function ProfileCard({ nickname, birth_date, gender }: ICard) {
               text="수정"
               btnStyle="empty-light"
               handleOnClick={() => setOnEdit(true)}
-            /><Image
+            />
+            <Image
               className="cocktail"
               src="../../../assets/imgs/cocktails.png"
               width={120}

@@ -9,10 +9,10 @@ import Swal from 'sweetalert2';
 import { getProfile } from '@/apis/Member';
 import CocktailCard from '@/components/cocktail-list/CocktailCard';
 import BtnWithIcon from '@/components/common/BtnWithIcon';
+import NoContent from '@/components/common/NoContent';
 import CustomCocktailCard from '@/components/custom-cocktail/CustomCocktailCard';
 import ProfileCard from '@/components/member/ProfileCard';
 import memberStore from '@/store/memberStore';
-import NoContent from '@/components/common/NoContent';
 
 import './page.scss';
 
@@ -49,6 +49,8 @@ export default function Page() {
   const [myCocktails, setMyCocktails] = useState([] as ICocktailType[]);
   const [customCocktails, setCustomCocktails] = useState([] as ICustom[]);
   const visitedCocktails = memberStore((state) => state.visited);
+  const setBirthDate = memberStore((state) => state.setBirthDate);
+  const setGender = memberStore((state) => state.setGender);
   const setMyLikeCocktails = memberStore((state) => state.setMyCocktails);
   const setMyCustomCocktails = memberStore((state) => state.setCustomCocktails);
   const loadProfile = async () => {
@@ -59,6 +61,9 @@ export default function Page() {
         const responseData = await response.json();
         const { data } = responseData;
         setMyCocktails(data.heart_cocktails);
+        console.log(data.birth_date);
+        setBirthDate(data.birth_date);
+        setGender(data.gender);
         setCustomCocktails(data.custom_cocktails);
         setMyLikeCocktails(data.heart_cocktails);
         setMyCustomCocktails(data.custom_cocktails);
