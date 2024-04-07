@@ -9,11 +9,9 @@ import axios from 'axios';
 import Image from 'next/image';
 // eslint-disable-next-line import/order
 import { useState, useEffect } from 'react';
-import { redirect } from 'next/navigation';
 import Swal from 'sweetalert2';
 import BtnWithIcon from '../common/BtnWithIcon';
 import authStore from '@/store/authStore';
-import { DataObject } from '@mui/icons-material';
 
 interface ICard {
   nickname: string;
