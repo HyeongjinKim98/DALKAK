@@ -79,6 +79,7 @@ export default function InfoSurvey() {
         });
       });
   };
+
   const validateNickname = () => {
     const { nickname } = surveyStore.getState();
     if (nickname === '') {
