@@ -82,7 +82,7 @@ export default function Layout({
   };
 
   const submit = async () => {
-    const { surveyCocktails, occassionId, baseId, alcoholContent, sweetness } =
+    const { surveyCocktails, occassionId, baseId, alcoholContent, sweetness, surveyIngredients } =
       surveyStore.getState();
 
     if (sweetness === 0) {
@@ -101,7 +101,7 @@ export default function Layout({
         base_id: baseId,
         alcohol_content: alcoholContent,
         sweetness,
-        survey_ingredients: [1, 2, 3],
+        survey_ingredients: surveyIngredients.map((ingredient) => ingredient.id),
       });
       if (response.status === 201) {
         Swal.fire({
@@ -122,7 +122,7 @@ export default function Layout({
         <div className="progressBarWrapper">
           <div
             className={`progressBar ${fadeOut ? 'fadeOut' : ''}`}
-            style={{ width: `${(progress * 100) / 5}%` }}
+            style={{ width: `${(progress * 100) / 6}%` }}
           />
         </div>
       </div>
@@ -137,67 +137,80 @@ export default function Layout({
             이전
           </button>
         )} */}
-        <button
-          className="next"
-          type="button"
-          onClick={() => {
-            switch (progress) {
-              case 0:
-                submitMemeberInfo();
-                break;
-              case 1:
-                if (surveyStore.getState().surveyCocktails.length !== 0) {
-                  nextProgress();
-                } else {
-                  Swal.fire({
-                    title: '최소 1개의 칵테일을 선택해주세요!',
-                    icon: 'warning',
-                    confirmButtonColor: '#ff7169',
-                  });
-                }
-                break;
-              case 2:
-                if (surveyStore.getState().occassionId !== 0) {
-                  nextProgress();
-                } else {
-                  Swal.fire({
-                    title: '언제 마시나요!',
-                    icon: 'warning',
-                    confirmButtonColor: '#ff7169',
-                  });
-                }
-                break;
-              case 3:
-                if (surveyStore.getState().baseId !== 0) {
-                  nextProgress();
-                } else {
-                  Swal.fire({
-                    title: '베이스를 선택해주세요!',
-                    icon: 'warning',
-                    confirmButtonColor: '#ff7169',
-                  });
-                }
-                break;
-              case 4:
-                if (surveyStore.getState().alcoholContent !== 0) {
-                  nextProgress();
-                } else {
-                  Swal.fire({
-                    title: '도수를 선택해주세요!',
-                    icon: 'warning',
-                    confirmButtonColor: '#ff7169',
-                  });
-                }
-                break;
-              default:
-                break;
-            }
-          }}
-        >
-          다음
-        </button>
+        {(progress < 6) && (
+          <button
+            className="next"
+            type="button"
+            onClick={() => {
+              switch (progress) {
+                case 0:
+                  submitMemeberInfo();
+                  break;
+                case 1:
+                  if (surveyStore.getState().surveyCocktails.length !== 0) {
+                    nextProgress();
+                  } else {
+                    Swal.fire({
+                      title: '최소 1개의 칵테일을 선택해주세요!',
+                      icon: 'warning',
+                      confirmButtonColor: '#ff7169',
+                    });
+                  }
+                  break;
+                case 2:
+                  if (surveyStore.getState().occassionId !== 0) {
+                    nextProgress();
+                  } else {
+                    Swal.fire({
+                      title: '언제 마시나요!',
+                      icon: 'warning',
+                      confirmButtonColor: '#ff7169',
+                    });
+                  }
+                  break;
+                case 3:
+                  if (surveyStore.getState().baseId !== 0) {
+                    nextProgress();
+                  } else {
+                    Swal.fire({
+                      title: '베이스를 선택해주세요!',
+                      icon: 'warning',
+                      confirmButtonColor: '#ff7169',
+                    });
+                  }
+                  break;
+                case 4:
+                  if (surveyStore.getState().alcoholContent !== 0) {
+                    nextProgress();
+                  } else {
+                    Swal.fire({
+                      title: '도수를 선택해주세요!',
+                      icon: 'warning',
+                      confirmButtonColor: '#ff7169',
+                    });
+                  }
+                  break;
+                case 5:
+                  if (surveyStore.getState().sweetness !== 0) {
+                    nextProgress();
+                  } else {
+                    Swal.fire({
+                      title: '당도를 선택해주세요!',
+                      icon: 'warning',
+                      confirmButtonColor: '#ff7169',
+                    });
+                  }
+                  break;
+                default:
+                  break;
+              }
+            }}
+          >
+            다음
+          </button>
+        )}
 
-        {progress === 5 && (
+        {progress === 6 && (
           <button
             className="next"
             type="button"

@@ -7,6 +7,7 @@ import IngredientTag from './IngredientTag';
 import authStore from '@/store/authStore';
 import useRefrigeratorStore from '@/store/refrigeratorStore';
 import useSearchStore from '@/store/searchStore';
+import surveyStore from '@/store/surveyStore';
 import { IIngredientType } from '@/type/refrigeratorTypes';
 
 interface IPropsType {
@@ -22,6 +23,7 @@ export default function IngredientSearchForm(props: IPropsType) {
   const [resultList, setResultList] = useState([]);
   const { addRefrList, addMemoList } = useRefrigeratorStore();
   const { addIngredient } = useSearchStore();
+  const { addSurveyIngredients } = surveyStore();
 
   const getAccessToken = () => authStore.getState().accessToken;
   const authorization = getAccessToken();
@@ -74,6 +76,8 @@ export default function IngredientSearchForm(props: IPropsType) {
       typeof ingredient !== 'number'
     ) {
       addTempList(ingredient.id, ingredient.name);
+    } else if (type === 'survey' && typeof ingredient !== 'number') {
+      addSurveyIngredients(ingredient);
     }
   };
 
