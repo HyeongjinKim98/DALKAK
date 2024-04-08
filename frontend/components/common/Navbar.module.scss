@@ -104,7 +104,9 @@
     .nickname {
       color: var(--color-point);
       font-weight: 700;
-      min-width: 100px;
+      margin-right: 0.1vw;
+      min-width: 140px;
+      text-align: end;
     }
 
     .niceto {
@@ -171,12 +173,6 @@
   font-size: 1vw;
   font-weight: 950;
   text-align: start;
-}
-
-.nickname {
-  color: var(--color-point);
-  font-weight: 700;
-  margin-right: 0.1vw;
 }
 
 .btn {
