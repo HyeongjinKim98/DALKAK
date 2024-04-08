@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styles from './IngredientBlock.module.scss';
 import useRefrigeratorStore from '@/store/refrigeratorStore';
 import useSearchStore from '@/store/searchStore';
+import surveyStore from '@/store/surveyStore';
 import { IIngredientType } from '@/type/refrigeratorTypes';
 
 interface ITagType {
@@ -13,11 +14,14 @@ export default function IngredientBlock(props: ITagType) {
   const { type, ingredient } = props;
   const { removeIngredient } = useSearchStore();
   const { removeRefrList } = useRefrigeratorStore();
+  const { deleteSurveyIngredients } = surveyStore();
   const deleteIngredient = () => {
     if (type === 'search') {
       removeIngredient(ingredient);
     } else if (type === 'refrigerator') {
       removeRefrList(ingredient.id);
+    } else if (type === 'survey') {
+      deleteSurveyIngredients(ingredient);
     }
   };
 

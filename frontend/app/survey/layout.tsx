@@ -22,7 +22,8 @@ export default function Layout({
   const progress = surveyStore((state) => state.progress);
   const getQuestion = surveyStore((state) => state.getQuestion);
   const nextProgress = surveyStore((state) => state.nextProgress);
-  const beforeProgress = surveyStore((state) => state.beforeProgress);
+  // deprecated
+  // const beforeProgress = surveyStore((state) => state.beforeProgress);
   // const addSurveyIngredients = surveyStore(
   //   (state) => state.addSurveyIngredients,
   // );
@@ -49,6 +50,7 @@ export default function Layout({
       Swal.fire({
         title: '모든 항목을 입력해주세요',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
     } else {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/profile`, {
@@ -80,13 +82,20 @@ export default function Layout({
   };
 
   const submit = async () => {
-    const { surveyCocktails, occassionId, baseId, alcoholContent, sweetness } =
-      surveyStore.getState();
+    const {
+      surveyCocktails,
+      occassionId,
+      baseId,
+      alcoholContent,
+      sweetness,
+      surveyIngredients,
+    } = surveyStore.getState();
 
     if (sweetness === 0) {
       Swal.fire({
         title: '당도를 선택해주세요!',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
       return;
     }
@@ -98,12 +107,15 @@ export default function Layout({
         base_id: baseId,
         alcohol_content: alcoholContent,
         sweetness,
-        survey_ingredients: [1, 2, 3],
+        survey_ingredients: surveyIngredients.map(
+          (ingredient) => ingredient.id,
+        ),
       });
       if (response.status === 201) {
         Swal.fire({
           title: '제출 완료',
           icon: 'success',
+          confirmButtonColor: '#ff7169',
         });
         router.push('/');
       }
@@ -118,15 +130,13 @@ export default function Layout({
         <div className="progressBarWrapper">
           <div
             className={`progressBar ${fadeOut ? 'fadeOut' : ''}`}
-            style={{ width: `${(progress * 100) / 5}%` }}
+            style={{ width: `${(progress * 100) / 6}%` }}
           />
         </div>
       </div>
       <div className="surveyWrapper">{children}</div>
       <div className="progressWrapper">
-        {progress > 0 && (
-          // temp
-          // progress < 6 &&
+        {/* {progress > 0 && (
           <button
             className="before"
             type="button"
@@ -134,9 +144,8 @@ export default function Layout({
           >
             이전
           </button>
-        )}
-
-        {progress < 5 && (
+        )} */}
+        {progress < 6 && (
           <button
             className="next"
             type="button"
@@ -152,6 +161,7 @@ export default function Layout({
                     Swal.fire({
                       title: '최소 1개의 칵테일을 선택해주세요!',
                       icon: 'warning',
+                      confirmButtonColor: '#ff7169',
                     });
                   }
                   break;
@@ -162,6 +172,7 @@ export default function Layout({
                     Swal.fire({
                       title: '언제 마시나요!',
                       icon: 'warning',
+                      confirmButtonColor: '#ff7169',
                     });
                   }
                   break;
@@ -172,6 +183,7 @@ export default function Layout({
                     Swal.fire({
                       title: '베이스를 선택해주세요!',
                       icon: 'warning',
+                      confirmButtonColor: '#ff7169',
                     });
                   }
                   break;
@@ -182,6 +194,18 @@ export default function Layout({
                     Swal.fire({
                       title: '도수를 선택해주세요!',
                       icon: 'warning',
+                      confirmButtonColor: '#ff7169',
+                    });
+                  }
+                  break;
+                case 5:
+                  if (surveyStore.getState().sweetness !== 0) {
+                    nextProgress();
+                  } else {
+                    Swal.fire({
+                      title: '당도를 선택해주세요!',
+                      icon: 'warning',
+                      confirmButtonColor: '#ff7169',
                     });
                   }
                   break;
@@ -194,28 +218,18 @@ export default function Layout({
           </button>
         )}
 
-        {progress === 5 && (
+        {progress === 6 && (
           <button
             className="next"
             type="button"
             onClick={() => {
               submit();
+              clearSurvey();
             }}
           >
             제출
           </button>
         )}
-        {/* {progress === 7 && (
-          <button
-            className="next"
-            type="button"
-            onClick={() => {
-              submitSurvey();
-            }}
-          >
-            홈으로
-          </button>
-        )} */}
       </div>
     </>
   );

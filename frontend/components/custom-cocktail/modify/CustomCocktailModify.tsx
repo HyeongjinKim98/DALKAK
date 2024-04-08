@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 import styles from './CustomCocktailModify.module.scss';
 
 import BtnWithIcon from '@/components/common/BtnWithIcon';
-import CustomCocktailAddIngredientTest from '@/components/custom-cocktail/write/CustomCocktailAddIngredientTest';
+import CustomCocktailAddIngredient from '@/components/custom-cocktail/write/CustomCocktailAddIngredient';
 import CustomCocktailAddRecipe from '@/components/custom-cocktail/write/CustomCocktailAddRecipe';
 import CustomCocktailImageUpload from '@/components/custom-cocktail/write/CustomCocktailImageUpload';
 import CustomCocktailInput from '@/components/custom-cocktail/write/CustomCocktailInput';
@@ -205,6 +205,7 @@ export default function CustomCocktailModify(props: Props) {
       Swal.fire({
         title: '이미 추가된 항목입니다.',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
       return;
     }
@@ -213,6 +214,7 @@ export default function CustomCocktailModify(props: Props) {
       Swal.fire({
         title: '더 이상 재료를 추가할 수 없습니다.',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
       return;
     }
@@ -276,6 +278,11 @@ export default function CustomCocktailModify(props: Props) {
         );
         if (response.ok) {
           // eslint-disable-next-line no-alert
+          Swal.fire({
+            title: '커스텀 칵테일이 수정되었습니다.',
+            icon: 'success',
+            confirmButtonColor: '#ff7169',
+          });
           router.push(`/cocktail/detail?id=${customId}`);
         } else {
           // eslint-disable-next-line no-console
@@ -291,26 +298,31 @@ export default function CustomCocktailModify(props: Props) {
           Swal.fire({
             title: '커스텀 칵테일 이름을 작성해주세요.',
             icon: 'warning',
+            confirmButtonColor: '#ff7169',
           });
         } else if (!customSummary) {
           Swal.fire({
             title: '커스텀 칵테일 한 줄 요약(summary)을 작성해주세요.',
             icon: 'warning',
+            confirmButtonColor: '#ff7169',
           });
         } else if (!customComment) {
           Swal.fire({
             title: '커스텀 칵테일 간단한 설명(comment)를 작성해주세요.',
             icon: 'warning',
+            confirmButtonColor: '#ff7169',
           });
         } else if (!customRecipe || customRecipe.trim() === '') {
           Swal.fire({
             title: '커스텀 칵테일 레시피를 작성해주세요.',
             icon: 'warning',
+            confirmButtonColor: '#ff7169',
           });
         } else if (filteredList.length < 1) {
           Swal.fire({
             title: '커스텀 칵테일 재료를 추가해주세요.',
             icon: 'warning',
+            confirmButtonColor: '#ff7169',
           });
         }
       }
@@ -387,7 +399,7 @@ export default function CustomCocktailModify(props: Props) {
             </div>
           </div>
           <div className={styles.space}>
-            <CustomCocktailAddIngredientTest
+            <CustomCocktailAddIngredient
               handleInputChangeTest={handleInputChangeTest}
               handleUnitInputChange={handleUnitInputChange}
               removeItem={removeItem}

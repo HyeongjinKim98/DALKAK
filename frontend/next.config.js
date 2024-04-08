@@ -1,7 +1,7 @@
 // const { StrictMode } = require('react');
 
 const nextConfig = {
-  StrictMode: false,
+  reactStrictMode: true,
   distDir: 'build',
   output: 'export',
   trailingSlash: true,

@@ -14,7 +14,7 @@ export default function IngredientTag(props: ITagType) {
     <button
       type="button"
       onClick={
-        type === 'search' || type === 'custom'
+        type === 'search' || type === 'custom' || type === 'survey'
           ? () => handleOnClick(ingredient)
           : () => handleOnClick(ingredient.id)
       }

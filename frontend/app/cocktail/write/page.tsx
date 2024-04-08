@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import CustomCocktailWriteTest from '@/components/custom-cocktail/write/CustomCocktailWriteTest';
+import CustomCocktailWrite from '@/components/custom-cocktail/write/CustomCocktailWrite';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <div>
       <div>
-        <CustomCocktailWriteTest cocktailId={cocktailIdInt} />
+        <CustomCocktailWrite cocktailId={cocktailIdInt} />
       </div>
     </div>
   );

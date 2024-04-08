@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { getProfile } from '@/apis/Member';
 import CocktailCard from '@/components/cocktail-list/CocktailCard';
 import BtnWithIcon from '@/components/common/BtnWithIcon';
+import NoContent from '@/components/common/NoContent';
 import CustomCocktailCard from '@/components/custom-cocktail/CustomCocktailCard';
 import ProfileCard from '@/components/member/ProfileCard';
 import memberStore from '@/store/memberStore';
@@ -48,6 +49,8 @@ export default function Page() {
   const [myCocktails, setMyCocktails] = useState([] as ICocktailType[]);
   const [customCocktails, setCustomCocktails] = useState([] as ICustom[]);
   const visitedCocktails = memberStore((state) => state.visited);
+  const setBirthDate = memberStore((state) => state.setBirthDate);
+  const setGender = memberStore((state) => state.setGender);
   const setMyLikeCocktails = memberStore((state) => state.setMyCocktails);
   const setMyCustomCocktails = memberStore((state) => state.setCustomCocktails);
   const loadProfile = async () => {
@@ -58,6 +61,9 @@ export default function Page() {
         const responseData = await response.json();
         const { data } = responseData;
         setMyCocktails(data.heart_cocktails);
+        console.log(data.birth_date);
+        setBirthDate(data.birth_date);
+        setGender(data.gender);
         setCustomCocktails(data.custom_cocktails);
         setMyLikeCocktails(data.heart_cocktails);
         setMyCustomCocktails(data.custom_cocktails);
@@ -66,6 +72,7 @@ export default function Page() {
         Swal.fire({
           title: '로그인이 필요합니다',
           icon: 'warning',
+          confirmButtonColor: '#ff7169',
         });
         window.location.replace('/oauth');
       }
@@ -73,6 +80,7 @@ export default function Page() {
       Swal.fire({
         title: '프로필을 불러오는데 실패하였습니다.',
         icon: 'warning',
+        confirmButtonColor: '#ff7169',
       });
     } finally {
       setLoading(false);
@@ -115,7 +123,11 @@ export default function Page() {
           </div>
           {visitedCocktails.length === 0 && (
             <div className="no-content-like">
-              <h3>최근 조회한 칵테일이 없습니다</h3>
+              <NoContent
+                title="Oops!"
+                line1="아직 아무 칵테일도 조회하지 않았군요"
+                line2="지금 달칵의 다양한 칵테일을 즐겨보세요!"
+              />
             </div>
           )}
         </div>
@@ -146,7 +158,11 @@ export default function Page() {
             ))}
             {myCocktails.length === 0 && (
               <div className="no-content-like">
-                <h3>좋아요 누른 칵테일이 없습니다.</h3>
+                <NoContent
+                  title="Oops!"
+                  line1="아직 좋아하는 칵테일이 없어요.."
+                  line2="마음에 드는 칵테일의 좋아요를 눌러보세요!"
+                />
               </div>
             )}
           </div>
@@ -170,13 +186,15 @@ export default function Page() {
               <CustomCocktailCard
                 key={cocktail.id}
                 custom={cocktail}
-                type="big"
+                type="member"
               />
             ))}
             {customCocktails.length === 0 && (
-              <div className="no-content-like">
-                <h3>내 커스텀 칵테일이 없습니다.</h3>
-              </div>
+              <NoContent
+                title="Oops!"
+                line1="ㅇㅅㅇ? 아직 커스텀 칵테일이 없어요.."
+                line2="당신만의 커스텀 칵테일을 공유해주세요!"
+              />
             )}
           </div>
         </div>

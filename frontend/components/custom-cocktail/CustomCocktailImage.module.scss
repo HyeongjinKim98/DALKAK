@@ -1,8 +1,13 @@
 .wrapper {
-  border-radius: 10%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
   width: 19vw;
   height: 19vw;
   overflow: hidden;
+  border-radius: 10%;
+  text-align: center;
+  margin-bottom: 2vh;
 
   img {
     height: 100%;
