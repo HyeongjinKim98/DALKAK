@@ -1,14 +1,11 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-no-comment-textnodes */
-// eslint-disable-next-line camelcase, camelcase
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import './ProfileCard.scss';
 import axios from 'axios';
 import Image from 'next/image';
-// eslint-disable-next-line import/order
-import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import BtnWithIcon from '../common/BtnWithIcon';
 import authStore from '@/store/authStore';

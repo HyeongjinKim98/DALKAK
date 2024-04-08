@@ -74,6 +74,13 @@ const memberStore = create(
       },
       setVisited: (cocktail) => {
         set((state) => {
+          const isAlreadyVisited = state.visited.find(
+            (item) => item.id === cocktail.id,
+          );
+
+          if (isAlreadyVisited) {
+            return { visited: state.visited };
+          }
           const updatedVisited = [cocktail, ...state.visited].slice(0, 10);
           return { visited: updatedVisited };
         });
