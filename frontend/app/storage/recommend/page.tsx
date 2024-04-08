@@ -4,6 +4,8 @@ import { Suspense, useEffect, useState } from 'react';
 import styles from './refrigerator-recommend.module.scss';
 
 import { ICocktailType } from '../../../type/searchTypes';
+import { type } from '../../oauth/types';
+import Confetti from '@/components/common/Confetti';
 import Loading from '@/components/common/Loading';
 import RecommendList from '@/components/store/RecommendList';
 import authStore from '@/store/authStore';
@@ -27,6 +29,7 @@ const getRecommentResult = async () => {
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -46,6 +49,7 @@ export default function Page() {
     fetchData();
     setTimeout(() => {
       setLoading(false);
+      setIsVisible(true);
     }, 3000);
     // fetchData 함수 호출
   }, []);
@@ -68,6 +72,7 @@ export default function Page() {
           />
         ) : (
           <>
+            {isVisible && <Confetti />}
             <RecommendList
               title="내가 가진 재료들로 만들 수 있는 칵테일이에요"
               cocktailList={zeroList}
