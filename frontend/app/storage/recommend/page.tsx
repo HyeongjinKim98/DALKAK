@@ -5,7 +5,6 @@ import Confetti from 'react-confetti';
 import styles from './refrigerator-recommend.module.scss';
 
 import { ICocktailType } from '../../../type/searchTypes';
-import { type } from '../../oauth/types';
 import Loading from '@/components/common/Loading';
 import RecommendList from '@/components/store/RecommendList';
 import authStore from '@/store/authStore';
