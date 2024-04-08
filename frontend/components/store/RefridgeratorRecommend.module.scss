@@ -1,20 +1,22 @@
 .container {
-  height: 60%;
+  height: 15vh;
+  width: 20vw;
+  // background-color: orange;
   display: flex;
   align-items: flex-end;
   cursor: pointer;
   position: relative;
 
   .image-wrapper {
-    height: 100%;
-    margin-right: 20px;
     display: flex;
     align-items: flex-end;
     position: relative;
 
     .tools {
+      // background-color: rebeccapurple;
       width: auto;
-      height: 100px;
+      width: 10vh;
+      height: 10vh;
       position: absolute;
     }
 
@@ -22,16 +24,17 @@
       width: 0;
       height: 0;
       position: absolute;
-      left: 0px;
-      bottom: 60px;
+      left: 0;
+      bottom: 20px;
       transition: 0.3s;
     }
   }
 
   .text-container {
-    margin-bottom: 10px;
+    width: auto;
+    margin-bottom: 1vh;
     position: relative;
-    left: 90px;
+    margin-left: 13vh;
 
     h3 {
       font-size: 0.8rem;
@@ -54,8 +57,8 @@
   }
   .firework {
     width: auto;
-    height: 100px;
-    left: -40px;
+    height: 80px;
+    left: -30px;
     bottom: 20px;
     transition: 0.3s;
   }
