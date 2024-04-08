@@ -2,6 +2,7 @@
   background-color: var(--color-base);
   height: 100%;
   display: flex;
+  width: 20vw;
   align-items: flex-end;
   border-radius: 10px 10px 0 0;
 }
@@ -10,7 +11,7 @@
   background-color: white;
   width: 80%;
   height: 95%;
-  border-radius: 0 10px 0 0;
+  border-radius: 10px 10px 0 0;
   margin: 0 auto;
   overflow: auto;
 
@@ -19,7 +20,6 @@
     flex-direction: column;
     width: 10vw;
     height: fit-content;
-    overflow: auto;
     gap: 2vw;
     justify-content: flex-start;
     align-items: center;

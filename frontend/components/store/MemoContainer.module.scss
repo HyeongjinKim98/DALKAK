@@ -1,8 +1,10 @@
 .container {
+  // background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: 95vh;
+  width: 27vw;
 
   .search-wrapper {
     display: flex;

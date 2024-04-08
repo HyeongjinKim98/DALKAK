@@ -1,7 +1,7 @@
 .container {
-  // background-color: pink;
+  // background-color: yellow;
   display: flex;
-  min-height: 20vh;
-  max-height: 50vh;
   align-items: flex-end;
+  justify-content: space-between;
+  height: 20vh;
 }

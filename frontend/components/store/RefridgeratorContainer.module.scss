@@ -1,16 +1,14 @@
 .container {
   display: flex;
-  height: 100%;
-  min-height: 45vh;
+  height: 75vh;
+  width: 70vw;
   box-sizing: border-box;
 
   .food-area {
-    // background-color: skyblue;
-    flex: 2;
+    width: 50vw;
   }
 
   .alcohol-area {
-    // background-color: gold;
-    flex: 1;
+    width: 20vw;
   }
 }

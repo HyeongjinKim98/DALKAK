@@ -1,16 +1,20 @@
 .container {
   display: flex;
+  // background-color: rebeccapurple;
 }
 
 .refrigerator-container {
   // background-color: orange;
   height: 95vh;
-  flex: 7;
+  width: 70vw;
   display: flex;
   flex-direction: column;
 }
 
 .memo-container {
   // background-color: pink;
-  flex: 3;
+  height: 95vh;
+  width: 30vw;
+  padding-left: 3vw;
+  box-sizing: border-box;
 }

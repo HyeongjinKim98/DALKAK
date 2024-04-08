@@ -1,23 +1,40 @@
 .container {
-  height: 60%;
+  height: 15vh;
+  width: 20vw;
+  // background-color: orange;
   display: flex;
   align-items: flex-end;
   cursor: pointer;
+  position: relative;
 
   .image-wrapper {
-    height: 100%;
-    margin-right: 2vw;
     display: flex;
     align-items: flex-end;
+    position: relative;
 
-    img {
+    .tools {
+      // background-color: rebeccapurple;
       width: auto;
-      height: 8vh;
+      width: 10vh;
+      height: 10vh;
+      position: absolute;
+    }
+
+    .firework {
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 0;
+      bottom: 20px;
+      transition: 0.3s;
     }
   }
 
   .text-container {
-    margin-bottom: 10px;
+    width: auto;
+    margin-bottom: 1vh;
+    position: relative;
+    margin-left: 13vh;
 
     h3 {
       font-size: 0.8rem;
@@ -36,6 +53,13 @@
 .container:hover {
   h3 {
     color: var(--color-point);
+    transition: 0.3s;
+  }
+  .firework {
+    width: auto;
+    height: 80px;
+    left: -30px;
+    bottom: 20px;
     transition: 0.3s;
   }
 }

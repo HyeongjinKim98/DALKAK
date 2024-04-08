@@ -1,17 +1,14 @@
 .container {
-  // background-color: pink;
-  display: flex;
-  width: 100%;
-  line-height: 7vh;
+  width: 27vw;
+  line-height: 50px;
   margin: 0 auto;
   cursor: pointer;
+  font-size: 1rem;
 
   .name {
     flex: 4;
     text-align: left;
     padding-left: 2vw;
-    box-sizing: border-box;
-    border-bottom: 0.2vw solid #e9e5cc;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -21,13 +18,11 @@
     background-color: #c8a390;
     width: 0.3vw;
     line-height: 5vh;
-    border-bottom: 0.2vw solid #c8a390;
   }
 
   .delete {
     flex: 1;
     text-align: center;
-    border-bottom: 0.2vw solid #e9e5cc;
     color: var(--color-placeholder);
     cursor: pointer;
   }

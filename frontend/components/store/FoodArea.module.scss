@@ -1,10 +1,13 @@
 .container {
   display: flex;
-  height: 100%;
+  height: 75vh;
+  width: 70vw;
 }
 
 .container-outer {
-  flex: 97;
+  // flex: 97;
+  height: 75vh;
+  width: 47vw;
   background-color: var(--color-base);
   display: flex;
   align-items: flex-end;
@@ -12,21 +15,20 @@
 
   .container-inner {
     background-color: white;
-    width: 95%;
-    height: 95%;
+    height: 72vh;
+    width: 45vw;
     border-radius: 0 10px 0 0;
-    overflow: auto;
     display: flex;
-    flex-wrap: wrap;
-    gap: 2vw;
+    // flex-wrap: wrap;
+    // gap: 2vw;
 
     .inside {
-      width: calc(100% - 4vw);
-      height: fit-content;
-      overflow: auto;
+      width: 95%;
+      height: 65vh;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      align-content: flex-start;
       justify-content: flex-start;
       margin: 2vw auto 0 auto;
 
@@ -43,7 +45,7 @@
 
 .hinges {
   // background-color: pink;
-  flex: 3;
+  width: 3vw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

@@ -15,29 +15,27 @@ export default function MemoRow(props: IPropsType) {
   const { ingredient, handleOnClick } = props;
 
   return (
-    <Draggable
-      draggableId={ingredient.id.toString()}
-      key={600 + ingredient.id}
-      index={ingredient.id}
-    >
-      {(provided) => (
-        <div
-          className={styles.container}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          <div className={styles.name}>{ingredient.name}</div>
-          <div className={styles.line} />
-          <button
-            type="button"
-            className={styles.delete}
+    <div className={styles.container}>
+      <Draggable
+        draggableId={ingredient.id.toString()}
+        key={600 + ingredient.id}
+        index={ingredient.id}
+      >
+        {(provided) => (
+          <div
+            className={styles.name}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            role="button"
+            tabIndex={0}
             onClick={() => handleOnClick(ingredient.id)}
+            onKeyDown={() => handleOnClick(ingredient.id)}
           >
-            삭제
-          </button>
-        </div>
-      )}
-    </Draggable>
+            {ingredient.name}
+          </div>
+        )}
+      </Draggable>
+    </div>
   );
 }

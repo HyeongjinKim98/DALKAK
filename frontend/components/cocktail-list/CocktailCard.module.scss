@@ -11,9 +11,10 @@
     overflow: hidden;
     border-radius: 10%;
     margin-bottom: 2vh;
-    text-align: center;
     box-shadow: 0.4vw 0.4vw 0.7vw 0.01vw var(--color-base);
     cursor: pointer;
+    display: flex;
+    align-items: center;
 
     img {
       height: 100%;

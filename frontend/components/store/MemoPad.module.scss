@@ -1,9 +1,10 @@
 .container {
-  background-color: var(--color-memo);
-  width: 90%;
-  max-height: 50vh;
-  margin-left: auto;
+  background: linear-gradient(var(--color-memo) 49px, #c8a390 1px);
+  background-size: 100% 50px;
+  width: 27vw;
+  height: 75vh;
   overflow: auto;
+  font-size: 0.8rem;
 }
 .containerr::-webkit-scrollbar {
   width: 0;
