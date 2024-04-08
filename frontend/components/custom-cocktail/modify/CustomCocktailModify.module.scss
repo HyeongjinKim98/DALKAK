@@ -127,4 +127,19 @@
   font-size: 0.95vw;
   padding: 0.7vw 0.7vw;
   resize: none;
+  word-break: break-all;
+}
+
+.text-area {
+  display: flex;
+  flex-direction: column;
+
+  .text-length {
+    align-self: end;
+    font-size: 0.7vw;
+    margin-top: 0.2vw;
+    margin-bottom: 1vw;
+    position: relative;
+    left: 1vw;
+  }
 }

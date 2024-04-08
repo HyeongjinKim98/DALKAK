@@ -161,6 +161,10 @@ export default function CustomCocktailWrite(props: Props) {
     infoPlaceholder.split('|').join('\n');
 
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length > 255) {
+      e.target.value = e.target.value.slice(0, 255);
+    }
+
     setCustomComment(e.target.value);
   };
 
@@ -381,12 +385,18 @@ export default function CustomCocktailWrite(props: Props) {
                 />
               </div>
               <div className={styles.inputs}>
-                <textarea
-                  className={styles['info-input']}
-                  value={customComment}
-                  placeholder={splitedInfoPlaceholder(infoPlaceholder)}
-                  onChange={(e) => handleTextAreaChange(e)}
-                />
+                <div className={styles['text-area']}>
+                  <textarea
+                    className={styles['info-input']}
+                    value={customComment}
+                    placeholder={splitedInfoPlaceholder(infoPlaceholder)}
+                    onChange={(e) => handleTextAreaChange(e)}
+                    maxLength={255}
+                  />
+                  <div className={styles['text-length']}>
+                    {customComment.length}/{255}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
