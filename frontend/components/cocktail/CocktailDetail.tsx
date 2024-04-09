@@ -18,10 +18,15 @@ import CustomCocktailRecipe from '@/components/custom-cocktail/CustomCocktailRec
 import IngredientCardWrapper from '@/components/custom-cocktail/IngredientCardWrapper';
 import ToolCardWrapper from '@/components/custom-cocktail/ToolCardWrapper';
 
+import authStore from '@/store/authStore';
+
 interface Unit {
   id: number;
   name: string;
 }
+
+const getAccessToken = () => authStore.getState().accessToken;
+const authorization = getAccessToken();
 
 interface Cocktail_Ingredients {
   id: number;
@@ -75,8 +80,6 @@ export default function CocktailDetail({ cocktailId }: Props) {
   const [cocktailIngredients, setCocktailIngredients] = useState<
     Cocktail_Ingredients[]
   >([]);
-  const authorization =
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJpYXQiOjE3MTIxOTc5OTksImV4cCI6MTcxMjYyOTk5OSwiaWQiOjZ9.w_9FzZor4EvYAWqZCvsi-fOkIvvwcD8jaWitynt12hI';
 
   useEffect(() => {
     async function getData(id: number) {
